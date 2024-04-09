@@ -121,6 +121,19 @@
         animation-delay: .37s;
     }
 
+    .rostro{
+        background-image: url('./fondo_transparente.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 3px solid #10B981;
+        border-radius:20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 6px 6px rgba(0, 0, 0, 0.08);
+    }
+
     @keyframes salto {
         from {
             transform: scaleX(1.25);
@@ -133,7 +146,9 @@
     }
 
     #Modal-recortado-imagen {
-        display: flex !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 30px
     }
 
     /* Estilo para el cursor de escritura */
@@ -334,8 +349,8 @@
                     modalRecortar.style.display = 'none';
                     modalRecortadoImagen.style.display = 'block';
                     //Se comento el quitar fondo porque se acabaron los intentos con la api
-                    //QuitarFondo(archivoRecortado);
-                    detectarRostros(archivoRecortado);
+                    QuitarFondo(archivoRecortado);
+                    // detectarRostros(archivoRecortado);
                 });
             }
 
@@ -356,8 +371,10 @@
             function QuitarFondo(archivo) {
                 document.getElementById('loader').style.display = 'block';
                 var url = "https://techhk.aoscdn.com/api/tasks/visual/segmentation";
-                var apiKey = "wxackhnzvcg57j2yy";
-
+                // Pasada API Key Prueba
+                // var apiKey = "wxackhnzvcg57j2yy";
+                // Nueva API Key Prueba
+                var apiKey = "wx5raadukjhva8sq3";
                 var formData = new FormData();
                 formData.append("image_file", archivo);
                 formData.append("sync", 1);
@@ -445,16 +462,16 @@
 
                                 var imagenRecortada = new Image();
                                 imagenRecortada.src = lienzo.toDataURL();
-                                imagenRecortada.classList.add('w-32', 'h-36')
+                                imagenRecortada.classList.add('w-full', 'h-32')
 
                                 var divRostro = document.createElement("div");
-                                divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-36');
+                                divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]');
                                 divRostro.appendChild(imagenRecortada);
 
                                 var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
-                                divImagenRecortada.classList.add('flex');
+                                divImagenRecortada.classList.add('grid');
                                 divImagenRecortada.appendChild(divRostro);
-                                divImagenRecortada.classList.add('flex');
+                                divImagenRecortada.classList.add('grid');
                             };
                         };
                         reader.readAsDataURL(blob);
