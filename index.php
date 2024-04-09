@@ -10,7 +10,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/all.css" integrity="sha512-ajhUYg8JAATDFejqbeN7KbF2zyPbbqz04dgOLyGcYEk/MJD3V+HJhJLKvJ2VVlqrr4PwHeGTTWxbI+8teA7snw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/all.css"
+        integrity="sha512-ajhUYg8JAATDFejqbeN7KbF2zyPbbqz04dgOLyGcYEk/MJD3V+HJhJLKvJ2VVlqrr4PwHeGTTWxbI+8teA7snw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
     @import url('//fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,800&display=swap');
@@ -72,7 +74,7 @@
         border-radius: 6px;
     }
 
-    .Boton-Upload{
+    .Boton-Upload {
         box-shadow: 0 4px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px rgba(0, 0, 0, .14), 0 1px 3px rgba(0, 0, 0, .12);
     }
 
@@ -121,12 +123,12 @@
         animation-delay: .37s;
     }
 
-    .rostro{
+    .rostro {
         background-image: url('./fondo_transparente.jpg');
         background-position: center;
         background-repeat: no-repeat;
         border: 3px solid #10B981;
-        border-radius:20px;
+        border-radius: 20px;
         padding-left: 10px;
         padding-right: 10px;
         padding-top: 10px;
@@ -187,10 +189,10 @@
 
     <button onclick="toggleModal()" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Mostrar Div</button>
 
-    <div id="modal" class="w-full h-full z-[999999] justify-center" style="display: block;">
+    <div id="modal" class="w-full h-full z-[999999] justify-center" style="display: none;">
         <div class="w-full h-full" style="background: rgba(0, 0, 0, .65); animation: mask .2s linear;">
             <div class="Modal md:m-auto w-full h-full absolute inset-0 overflow-hidden shadow-lg rounded-lg animate-bubbles z-[999999] flex flex-col"
-            style="width: 500px; height: 600px; z-index: 99999;">
+                style="width: 500px; height: 600px; z-index: 99999;">
                 <div class="Modal-Contenido">
                     <div class="Modal-Header bg-emerald-400">
                         <div class="Header-icono-Cerrar" onclick="toggleModal()"><svg viewBox="0 0 30 30"
@@ -200,17 +202,19 @@
                                 </path>
                             </svg></div>
                         <div class="Header-Titulo">
-                            <p class="Texto-Titulo font-bold text-xl">Elige tus <span id="texto-animado" class="Texto-Titulo font-bold text-xl text-white"></span> </p>
+                            <p class="Texto-Titulo font-bold text-xl">Elige tus <span id="texto-animado"
+                                    class="Texto-Titulo font-bold text-xl text-white"></span> </p>
                         </div>
                     </div>
                     <div id="Modal-Body" class="Modal-Body block">
                         <div class="Modal-Body-Botones">
-                            <div class="container mx-auto mt-10 items-center w-[80%] bg-[#e4e4e3] rounded-lg py-4 Boton-Upload hover:scale-105">
+                            <div
+                                class="container mx-auto mt-10 items-center w-[80%] bg-[#e4e4e3] rounded-lg py-4 Boton-Upload hover:scale-105">
                                 <button type="button" id="btnSubirArchivo"
                                     class="text-black w-80 h-10 rounded-xl mx-auto  font-bold flex gap-10 items-center"
                                     onclick="abrirModalRecorte()">
-                                    <svg class="h-8 w-8 text-black hover:scale-110" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg class="h-8 w-8 text-black hover:scale-110" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
@@ -234,12 +238,15 @@
                     <div class="cropper-container w-full h-80">
                         <img id="imagenParaRecortar" src="" alt="Imagen para recortar">
                     </div>
-                    <div class="flex justify-center bottom-0 botones-accion mt-24 bg-[#e4e4e3] py-[14px] px-5 gap-5 text-md">
-                        <button onclick="cancelarRecorte()" class="border-[black] border-[1px] px-4 py-2 rounded-lg block w-[40%] uppercase font-bold ">Regresar
+                    <div
+                        class="flex justify-center bottom-0 botones-accion mt-24 bg-[#e4e4e3] py-[14px] px-5 gap-5 text-md">
+                        <button onclick="cancelarRecorte()"
+                            class="border-[black] border-[1px] px-4 py-2 rounded-lg block w-[40%] uppercase font-bold ">Regresar
                         </button>
                         <input type="file" id="inputArchivo" style="display: none;">
                         <button onclick="recortarImagen()"
-                            class="bg-emerald-400 px-4 py-2 rounded-lg block w-full uppercase font-bold">Confirmar Recorte <i class="fas fa-cut"></i>
+                            class="bg-emerald-400 px-4 py-2 rounded-lg block w-full uppercase font-bold">Confirmar
+                            Recorte <i class="fas fa-cut"></i>
                         </button>
                     </div>
                 </div>
@@ -251,255 +258,256 @@
                         <span class="texto-cargando">Cargando...</span>
                     </div>
                 </div>
-                <div id="Modal-recortado-imagen"
-                    class="hidden items-center mt-20 h-auto flex-row justify-center">
+                <div id="Modal-recortado-imagen" class="hidden items-center mt-20 h-auto flex-row justify-center">
                 </div>
                 <div class="modal-footer mx-4 mt-auto mb-5 text-lg font-bold">
-                    <button class="block w-full py-3 bg-emerald-400 rounded-xl" onclick="toggleModal()">CANCELAR</button>
+                    <button class="block w-full py-3 bg-emerald-400 rounded-xl"
+                        onclick="toggleModal()">CANCELAR</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
-        <script>
-            function toggleModal() {
-                var modal = document.getElementById('modal');
-                var modalContenido = document.getElementById('Modal-Body');
-                var modalFooter=document.querySelector('.modal-footer');
-                var modalRecortar = document.getElementById('Modal-recortar');
-                var inputArchivo = document.getElementById('inputArchivo');
-                var imagenParaRecortar = document.getElementById('imagenParaRecortar');
-                var cropper = imagenParaRecortar.cropper;
-                var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
+    <script>
+        function toggleModal() {
+            var modal = document.getElementById('modal');
+            var modalContenido = document.getElementById('Modal-Body');
+            var modalFooter = document.querySelector('.modal-footer');
+            var modalRecortar = document.getElementById('Modal-recortar');
+            var inputArchivo = document.getElementById('inputArchivo');
+            var imagenParaRecortar = document.getElementById('imagenParaRecortar');
+            var cropper = imagenParaRecortar.cropper;
+            var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
 
-                if (modal.style.display === 'none') {
-                    modal.style.display = 'block';
-                    modalContenido.style.display = 'block';
-                    modalFooter.style.display= 'block';
-                    modalRecortar.style.display = 'none';
-                    inputArchivo.value = '';
-                    cropper.destroy();
-                    divImagenRecortada.innerHTML = '';
+            if (modal.style.display === 'none') {
+                modal.style.display = 'block';
+                modalContenido.style.display = 'block';
+                modalFooter.style.display = 'block';
+                modalRecortar.style.display = 'none';
+                inputArchivo.value = '';
+                cropper.destroy();
+                divImagenRecortada.innerHTML = '';
 
-                } else {
-                    modal.style.display = 'none';
-                    modalContenido.style.display = 'block';
-                    modalFooter.style.display= 'block';
-                    modalRecortar.style.display = 'none';
-                    inputArchivo.value = '';
-                    cropper.destroy();
-                    divImagenRecortada.innerHTML = '';
-                }
+            } else {
+                modal.style.display = 'none';
+                modalContenido.style.display = 'block';
+                modalFooter.style.display = 'block';
+                modalRecortar.style.display = 'none';
+                inputArchivo.value = '';
+                cropper.destroy();
+                divImagenRecortada.innerHTML = '';
             }
+        }
 
-            function abrirModalRecorte() {
-                var modalContenido = document.getElementById('Modal-Body');
-                var modalFooter=document.querySelector('.modal-footer');
-                var modalRecortar = document.getElementById('Modal-recortar');
-                var inputArchivo = document.getElementById('inputArchivo');
-                var imagenParaRecortar = document.getElementById('imagenParaRecortar');
-                var imagenRecortada = document.getElementById('imagenRecortada');
+        function abrirModalRecorte() {
+            var modalContenido = document.getElementById('Modal-Body');
+            var modalFooter = document.querySelector('.modal-footer');
+            var modalRecortar = document.getElementById('Modal-recortar');
+            var inputArchivo = document.getElementById('inputArchivo');
+            var imagenParaRecortar = document.getElementById('imagenParaRecortar');
+            var imagenRecortada = document.getElementById('imagenRecortada');
 
-                inputArchivo.click();
+            inputArchivo.click();
 
-                inputArchivo.addEventListener('change', function () {
-                    var file = this.files[0];
+            inputArchivo.addEventListener('change', function () {
+                var file = this.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagenParaRecortar.src = e.target.result;
+                    imagenRecortada.src = e.target.result;
+                    modalContenido.style.display = 'none';
+                    modalFooter.style.display = 'none';
+                    modalRecortar.style.display = 'block';
+                    inicializarCropper();
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function inicializarCropper() {
+            var imagenParaRecortar = document.getElementById('imagenParaRecortar');
+            var areaDeRecorte = document.getElementById('areaDeRecorte');
+
+            var cropper = new Cropper(imagenParaRecortar, {
+                aspectRatio: 1,
+                viewMode: 1,
+                crop: function (event) {
+                    console.log(event.detail.x);
+                    console.log(event.detail.y);
+                    console.log(event.detail.width);
+                    console.log(event.detail.height);
+                }
+            });
+        }
+
+        function recortarImagen() {
+            var imagenParaRecortar = document.getElementById('imagenParaRecortar');
+            var modalRecortar = document.getElementById('Modal-recortar');
+            var modalRecortadoImagen = document.getElementById('Modal-recortado-imagen');
+            var cropper = imagenParaRecortar.cropper;
+
+            cropper.getCroppedCanvas().toBlob(function (blob) {
+                var url = URL.createObjectURL(blob);
+                var archivoRecortado = new File([blob], 'imagen_recortada.png', { type: 'image/png' });
+
+                modalRecortar.style.display = 'none';
+                modalRecortadoImagen.style.display = 'block';
+                //Se comento el quitar fondo porque se acabaron los intentos con la api
+                QuitarFondo(archivoRecortado);
+                // detectarRostros(archivoRecortado);
+            });
+        }
+
+        function cancelarRecorte() {
+            var modalContenido = document.getElementById('Modal-Body');
+            var modalFooter = document.querySelector('.modal-footer');
+            var modalRecortar = document.getElementById('Modal-recortar');
+            var inputArchivo = document.getElementById('inputArchivo');
+            var imagenParaRecortar = document.getElementById('imagenParaRecortar');
+            var cropper = imagenParaRecortar.cropper;
+            cropper.destroy();
+            inputArchivo.value = '';
+            modalContenido.style.display = 'block';
+            modalFooter.style.display = 'block';
+            modalRecortar.style.display = 'none';
+        }
+
+        function QuitarFondo(archivo) {
+            document.getElementById('loader').style.display = 'block';
+            var url = "https://techhk.aoscdn.com/api/tasks/visual/segmentation";
+            // Pasada API Key Prueba
+            // var apiKey = "wxackhnzvcg57j2yy";
+            // Nueva API Key Prueba
+            var apiKey = "wx5raadukjhva8sq3";
+            var formData = new FormData();
+            formData.append("image_file", archivo);
+            formData.append("sync", 1);
+
+            fetch(url, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-API-Key": apiKey
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Imprimir la respuesta JSON
+                    var imageBlob = data.data.image;
+                    console.log(data.data.image);
+                    detectarRostros(imageBlob);
+                })
+                .catch(error => {
+                    document.getElementById('loader').style.display = 'none';
+                    console.error('Error al procesar la solicitud:', error);
+                });
+        }
+        function detectarRostros(archivo) {
+            document.getElementById('loader').style.display = 'block';
+
+            var url = "https://api-us.faceplusplus.com/facepp/v3/detect";
+            var apiKey = "9ngH8vQI0AjLUQu2fcVk1UuzUHWxMz2Z";
+            var apiSecret = "3_b25nUZNIoxp-4ab_BWoTejb_9GvYeZ";
+
+            var formData = new FormData();
+            formData.append("api_key", apiKey);
+            formData.append("api_secret", apiSecret);
+            formData.append("image_url", archivo);
+            formData.append("return_landmark", 2);
+            formData.append("return_attributes", "headpose,blur");
+
+            fetch(url, {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('loader').style.display = 'none';
+
+                    if (data.face_num > 0) {
+                        console.log(data);
+                        for (var j = 0; j < data.faces.length; j++) {
+                            const face = data.faces[j];
+                            const faceRectangle = face.face_rectangle;
+                            const rostro = {
+                                top: faceRectangle.top - 150,
+                                left: faceRectangle.left - 30,
+                                width: faceRectangle.width + 50,
+                                height: faceRectangle.height + 150
+                            };
+                            console.log(rostro);
+                            recortarImagenFinal(archivo, rostro);
+                        }
+                    } else {
+                        console.log('No se detectaron rostros en la imagen.');
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('loader').style.display = 'none';
+                    console.error('Error al procesar la solicitud:', error);
+                });
+        }
+        function recortarImagenFinal(archivo, rostro) {
+            fetch(archivo)
+                .then(response => response.blob())
+                .then(blob => {
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
-                        imagenParaRecortar.src = e.target.result;
-                        imagenRecortada.src = e.target.result;
-                        modalContenido.style.display = 'none';
-                        modalFooter.style.display= 'none';
-                        modalRecortar.style.display = 'block';
-                        inicializarCropper();
-                    };
+                        var imagenOriginal = new Image();
+                        imagenOriginal.src = e.target.result;
 
-                    reader.readAsDataURL(file);
-                });
-            }
+                        imagenOriginal.onload = function () {
+                            var lienzo = document.createElement("canvas");
+                            lienzo.width = rostro.width;
+                            lienzo.height = rostro.height;
+                            var contexto = lienzo.getContext("2d");
+                            contexto.drawImage(imagenOriginal, rostro.left, rostro.top, rostro.width, rostro.height, 0, 0, rostro.width, rostro.height);
 
-            function inicializarCropper() {
-                var imagenParaRecortar = document.getElementById('imagenParaRecortar');
-                var areaDeRecorte = document.getElementById('areaDeRecorte');
+                            var imagenRecortada = new Image();
+                            imagenRecortada.src = lienzo.toDataURL();
+                            imagenRecortada.classList.add('w-full', 'h-32')
 
-                var cropper = new Cropper(imagenParaRecortar, {
-                    aspectRatio: 1,
-                    viewMode: 1,
-                    crop: function (event) {
-                        console.log(event.detail.x);
-                        console.log(event.detail.y);
-                        console.log(event.detail.width);
-                        console.log(event.detail.height);
-                    }
-                });
-            }
+                            var divRostro = document.createElement("div");
+                            divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]');
+                            divRostro.appendChild(imagenRecortada);
 
-            function recortarImagen() {
-                var imagenParaRecortar = document.getElementById('imagenParaRecortar');
-                var modalRecortar = document.getElementById('Modal-recortar');
-                var modalRecortadoImagen = document.getElementById('Modal-recortado-imagen');
-                var cropper = imagenParaRecortar.cropper;
-
-                cropper.getCroppedCanvas().toBlob(function (blob) {
-                    var url = URL.createObjectURL(blob);
-                    var archivoRecortado = new File([blob], 'imagen_recortada.png', { type: 'image/png' });
-
-                    modalRecortar.style.display = 'none';
-                    modalRecortadoImagen.style.display = 'block';
-                    //Se comento el quitar fondo porque se acabaron los intentos con la api
-                    QuitarFondo(archivoRecortado);
-                    // detectarRostros(archivoRecortado);
-                });
-            }
-
-            function cancelarRecorte() {
-                var modalContenido = document.getElementById('Modal-Body');
-                var modalFooter=document.querySelector('.modal-footer');
-                var modalRecortar = document.getElementById('Modal-recortar');
-                var inputArchivo = document.getElementById('inputArchivo');
-                var imagenParaRecortar = document.getElementById('imagenParaRecortar');
-                var cropper = imagenParaRecortar.cropper;
-                cropper.destroy();
-                inputArchivo.value = '';
-                modalContenido.style.display = 'block';
-                modalFooter.style.display= 'block';
-                modalRecortar.style.display = 'none';
-            }
-
-            function QuitarFondo(archivo) {
-                document.getElementById('loader').style.display = 'block';
-                var url = "https://techhk.aoscdn.com/api/tasks/visual/segmentation";
-                // Pasada API Key Prueba
-                // var apiKey = "wxackhnzvcg57j2yy";
-                // Nueva API Key Prueba
-                var apiKey = "wx5raadukjhva8sq3";
-                var formData = new FormData();
-                formData.append("image_file", archivo);
-                formData.append("sync", 1);
-
-                fetch(url, {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        "X-API-Key": apiKey
-                    }
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data); // Imprimir la respuesta JSON
-                        var imageBlob = data.data.image;
-                        console.log(data.data.image);
-                        detectarRostros(imageBlob);
-                    })
-                    .catch(error => {
-                        document.getElementById('loader').style.display = 'none';
-                        console.error('Error al procesar la solicitud:', error);
-                    });
-            }
-            function detectarRostros(archivo) {
-                document.getElementById('loader').style.display = 'block';
-
-                var url = "https://api-us.faceplusplus.com/facepp/v3/detect";
-                var apiKey = "9ngH8vQI0AjLUQu2fcVk1UuzUHWxMz2Z";
-                var apiSecret = "3_b25nUZNIoxp-4ab_BWoTejb_9GvYeZ";
-
-                var formData = new FormData();
-                formData.append("api_key", apiKey);
-                formData.append("api_secret", apiSecret);
-                formData.append("image_url", archivo);
-                formData.append("return_landmark", 2);
-                formData.append("return_attributes", "headpose,blur");
-
-                fetch(url, {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('loader').style.display = 'none';
-
-                        if (data.face_num > 0) {
-                            console.log(data);
-                            for (var j = 0; j < data.faces.length; j++) {
-                                const face = data.faces[j];
-                                const faceRectangle = face.face_rectangle;
-                                const rostro = {
-                                    top: faceRectangle.top - 150,
-                                    left: faceRectangle.left - 30,
-                                    width: faceRectangle.width + 50,
-                                    height: faceRectangle.height + 150
-                                };
-                                console.log(rostro);
-                                recortarImagenFinal(archivo, rostro);
-                            }
-                        } else {
-                            console.log('No se detectaron rostros en la imagen.');
-                        }
-                    })
-                    .catch(error => {
-                        document.getElementById('loader').style.display = 'none';
-                        console.error('Error al procesar la solicitud:', error);
-                    });
-            }
-            function recortarImagenFinal(archivo, rostro) {
-                fetch(archivo)
-                    .then(response => response.blob())
-                    .then(blob => {
-                        var reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            var imagenOriginal = new Image();
-                            imagenOriginal.src = e.target.result;
-
-                            imagenOriginal.onload = function () {
-                                var lienzo = document.createElement("canvas");
-                                lienzo.width = rostro.width;
-                                lienzo.height = rostro.height;
-                                var contexto = lienzo.getContext("2d");
-                                contexto.drawImage(imagenOriginal, rostro.left, rostro.top, rostro.width, rostro.height, 0, 0, rostro.width, rostro.height);
-
-                                var imagenRecortada = new Image();
-                                imagenRecortada.src = lienzo.toDataURL();
-                                imagenRecortada.classList.add('w-full', 'h-32')
-
-                                var divRostro = document.createElement("div");
-                                divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]');
-                                divRostro.appendChild(imagenRecortada);
-
-                                var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
-                                divImagenRecortada.classList.add('grid');
-                                divImagenRecortada.appendChild(divRostro);
-                                divImagenRecortada.classList.add('grid');
-                            };
+                            var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
+                            divImagenRecortada.classList.add('grid');
+                            divImagenRecortada.appendChild(divRostro);
+                            divImagenRecortada.classList.add('grid');
                         };
-                        reader.readAsDataURL(blob);
-                    })
-                    .catch(error => console.error('Error al cargar el archivo:', error));
-            }
-            document.addEventListener("DOMContentLoaded", function (event) {
-                var textoAnimado = document.getElementById("texto-animado");
-                var texto = "imágenes";
-                function animarTexto() {
-                    texto = "imágenes";
-                    textoAnimado.textContent = "";
-                    for (var i = 0; i < texto.length; i++) {
-                        setTimeout(function () {
-                            textoAnimado.textContent += texto.charAt(0);
-                            texto = texto.substring(1);
-                            if (texto.length === 0) {
-                                setTimeout(animarTexto, 1000);
-                            }
-                        }, 150 * i);
-                    }
+                    };
+                    reader.readAsDataURL(blob);
+                })
+                .catch(error => console.error('Error al cargar el archivo:', error));
+        }
+        document.addEventListener("DOMContentLoaded", function (event) {
+            var textoAnimado = document.getElementById("texto-animado");
+            var texto = "imágenes";
+            function animarTexto() {
+                texto = "imágenes";
+                textoAnimado.textContent = "";
+                for (var i = 0; i < texto.length; i++) {
+                    setTimeout(function () {
+                        textoAnimado.textContent += texto.charAt(0);
+                        texto = texto.substring(1);
+                        if (texto.length === 0) {
+                            setTimeout(animarTexto, 1000);
+                        }
+                    }, 150 * i);
                 }
-                animarTexto();
-            });
+            }
+            animarTexto();
+        });
 
 
 
-        </script>
+    </script>
 </body>
 
 </html>
