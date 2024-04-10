@@ -146,9 +146,14 @@
     }
 
     #Modal-recortado-imagen {
+        /* display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 30px; */
+    }
+    .contenedor-rostro{
         display: grid !important;
         grid-template-columns: 1fr 1fr;
-        row-gap: 30px
+        row-gap: 30px;
     }
 
     /* Estilo para el cursor de escritura */
@@ -205,7 +210,7 @@
                     </div>
                     <div id="Modal-Body" class="Modal-Body block">
                         <div class="Modal-Body-Botones">
-                            <div class="container mx-auto mt-10 items-center w-[80%] bg-[#e4e4e3] rounded-lg py-4 Boton-Upload hover:scale-105">
+                            <div class="container mx-auto items-center w-[80%] bg-[#e4e4e3] rounded-lg py-4 Boton-Upload hover:scale-105">
                                 <button type="button" id="btnSubirArchivo"
                                     class="text-black w-80 h-10 rounded-xl mx-auto  font-bold flex gap-10 items-center"
                                     onclick="abrirModalRecorte()">
@@ -342,6 +347,7 @@
                 var modalRecortadoImagen = document.getElementById('Modal-recortado-imagen');
                 var cropper = imagenParaRecortar.cropper;
 
+
                 cropper.getCroppedCanvas().toBlob(function (blob) {
                     var url = URL.createObjectURL(blob);
                     var archivoRecortado = new File([blob], 'imagen_recortada.png', { type: 'image/png' });
@@ -370,11 +376,31 @@
 
             function QuitarFondo(archivo) {
                 document.getElementById('loader').style.display = 'block';
+                
+                // Crear un nuevo elemento div para que contenga los elementos del rostro
+                var modalRecortadoImagen = document.getElementById('Modal-recortado-imagen');
+                var divContenedorRostro = document.createElement("div");
+
+                divContenedorRostro.classList.add('contenedor-rostro');
+
+                var divTitulo = document.createElement("div");
+                divTitulo.classList.add('text-center', 'py-[32px]' ,'font-bold', 'text-[20px]' ,'uppercase');
+                // Crear un nuevo elemento h3
+                var h3Elemento = document.createElement("h3");
+
+                // Establecer el texto del h3
+                h3Elemento.textContent = "Escoge tu imagen";
+                
+                divTitulo.appendChild(h3Elemento);
+
+                modalRecortadoImagen.appendChild(divTitulo);
+                modalRecortadoImagen.appendChild(divContenedorRostro);
+
                 var url = "https://techhk.aoscdn.com/api/tasks/visual/segmentation";
                 // Pasada API Key Prueba
                 // var apiKey = "wxackhnzvcg57j2yy";
                 // Nueva API Key Prueba
-                var apiKey = "wx5raadukjhva8sq3";
+                var apiKey = "wx5raadukjh12312312";
                 var formData = new FormData();
                 formData.append("image_file", archivo);
                 formData.append("sync", 1);
@@ -465,13 +491,13 @@
                                 imagenRecortada.classList.add('w-full', 'h-32')
 
                                 var divRostro = document.createElement("div");
-                                divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]');
+                                divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]','hover:scale-105');
                                 divRostro.appendChild(imagenRecortada);
 
-                                var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
-                                divImagenRecortada.classList.add('grid');
-                                divImagenRecortada.appendChild(divRostro);
-                                divImagenRecortada.classList.add('grid');
+                                var divImagenRecortada2 = document.querySelector('.contenedor-rostro');
+                                divImagenRecortada2.classList.add('grid');
+                                divImagenRecortada2.appendChild(divRostro);
+                                divImagenRecortada2.classList.add('grid');
                             };
                         };
                         reader.readAsDataURL(blob);
