@@ -249,6 +249,9 @@
                             <div class="mx-5 mt-10">
                                 <h3 class="font-bold text-lg">Imagenes Recortadas</h3>
                                 <p class="text-md">La imagen proviene del dispositivo local</p>
+                                <div class="grid grid-cols-10">
+                                    <img class="imagen-recortada-1">
+                                </div>
                             </div>
                             <div class="container mx-auto flex justify-center mt-10 mb-6">
                                 <img id="imagenRecortada" src="" alt="Imagen recortada" style="display: none;">
@@ -300,12 +303,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
     <script>
+        var imagenPrevRecortada=document.querySelector('.imagen-recortada-1');
+        var srcImagenRecorteSeleccionada=localStorage.getItem("srcRostroElegido");
+        console.log(srcImagenRecorteSeleccionada);
+
+        function asignarValorImagenPrevRecortada(){
+            if (typeof imagenRecorteSeleccionada !== 'undefined') {
+                if (imagenRecorteSeleccionada) {
+                    imagenPrevRecortada.src= srcImagenRecorteSeleccionada;
+                }
+            }
+        }
+
         function toggleModal() {
             var modal = document.getElementById('modal');
             var modalContenido = document.getElementById('Modal-Body');
             var modalFooter = document.querySelector('.modal-footer');
             var modalRecortar = document.getElementById('Modal-recortar');
             var inputArchivo = document.getElementById('inputArchivo');
+            var ModalSeleccionadoRostro = document.getElementById('Modal-imagen-seleccionada');
             var imagenParaRecortar = document.getElementById('imagenParaRecortar');
             var cropper = imagenParaRecortar.cropper;
             var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
@@ -315,7 +331,9 @@
                 modalContenido.style.display = 'block';
                 modalFooter.style.display = 'block';
                 modalRecortar.style.display = 'none';
+                ModalSeleccionadoRostro.style.display='none';
                 inputArchivo.value = '';
+                asignarValorImagenPrevRecortada();
                 cropper.destroy();
                 divImagenRecortada.innerHTML = '';
 
@@ -324,7 +342,9 @@
                 modalContenido.style.display = 'block';
                 modalFooter.style.display = 'block';
                 modalRecortar.style.display = 'none';
+                ModalSeleccionadoRostro.style.display='none';
                 inputArchivo.value = '';
+                asignarValorImagenPrevRecortada();
                 cropper.destroy();
                 divImagenRecortada.innerHTML = '';
             }
@@ -430,7 +450,7 @@
                 // Pasada API Key Prueba
                 // var apiKey = "wxackhnzvcg57j2yy";
                 // Nueva API Key Prueba
-                var apiKey = "wx5raadukjhva8sq3";
+                var apiKey = "wxlh0wryx94rglssn";
                 var formData = new FormData();
                 formData.append("image_file", archivo);
                 formData.append("sync", 1);
@@ -539,8 +559,13 @@
                                 if (imagen) {
                                     src = imagen.src;
                                     console.log('SRC de la imagen clickeada:', src);
+                                    
+
 
                                     if (src) {
+                                        //Guardar en Local Storage
+                                        localStorage.setItem("srcRostroElegido",src);
+                                        //Logia para recortar imagen y adapatarlo al personaej
                                         var modalRecortadoImagen= document.getElementById('Modal-recortado-imagen');
                                         var divModalImagenPersonaje=document.querySelector('#Modal-imagen-seleccionada');
 
