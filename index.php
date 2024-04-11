@@ -10,9 +10,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0/css/all.css"
-        integrity="sha512-ajhUYg8JAATDFejqbeN7KbF2zyPbbqz04dgOLyGcYEk/MJD3V+HJhJLKvJ2VVlqrr4PwHeGTTWxbI+8teA7snw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
     @import url('//fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,800&display=swap');
@@ -72,18 +69,16 @@
         overflow: hidden;
         background: #fff;
         border-radius: 6px;
-    }
-
-    .Boton-Upload {
         box-shadow: 0 4px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px rgba(0, 0, 0, .14), 0 1px 3px rgba(0, 0, 0, .12);
     }
+
 
     .loader {
         margin-top: 100px;
         place-content: center;
         display: none;
         background-color: #FFF;
-        color: #10B981;
+        color: #00b8de;
         font-family: 'Montserrat', sans-serif;
         font-weight: 800;
     }
@@ -110,7 +105,7 @@
     .pelotas {
         width: 30px;
         height: 30px;
-        background-color: #10B981;
+        background-color: #00b8de;
         animation: salto .5s alternate infinite;
         border-radius: 50%
     }
@@ -121,19 +116,6 @@
 
     .pelotas:nth-child(3) {
         animation-delay: .37s;
-    }
-
-    .rostro {
-        background-image: url('./fondo_transparente.jpg');
-        background-position: center;
-        background-repeat: no-repeat;
-        border: 3px solid #10B981;
-        border-radius: 20px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 6px 6px rgba(0, 0, 0, 0.08);
     }
 
     @keyframes salto {
@@ -196,7 +178,7 @@
 
     <div id="modal" class="w-full h-full z-[999999] justify-center" style="display: none;">
         <div class="w-full h-full" style="background: rgba(0, 0, 0, .65); animation: mask .2s linear;">
-            <div class="Modal md:m-auto w-full h-full absolute inset-0 overflow-hidden shadow-lg rounded-lg animate-bubbles z-[999999] flex flex-col"
+            <div class="md:m-auto w-full h-full absolute inset-0 bg-white overflow-hidden shadow-lg rounded-lg animate-bubbles z-[999999]"
                 style="width: 500px; height: 600px; z-index: 99999;">
                 <div class="Modal-Contenido">
                     <div class="Modal-Header bg-emerald-400">
@@ -222,131 +204,133 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
-                                    <p>Presione aquí para subir archivos</p>
-                                </button>
-                                <input type="file" id="inputArchivo" style="display: none;">
+                                    <button type="button" id="btnSubirArchivo"
+                                        class="text-black w-64 h-10 rounded-xl m-auto hover:scale-110 font-bold"
+                                        onclick="abrirModalRecorte()">
+                                        Presione aquí para subir archivos
+                                    </button>
+                                    <input type="file" id="inputArchivo" style="display: none;">
+                                </div>
+                                <div class="container mx-auto flex justify-center mt-10 mb-6">
+                                    <img id="imagenRecortada" src="" alt="Imagen recortada" style="display: none;">
+                                </div>
                             </div>
-                            <div class="mx-5 mt-10">
-                                <h3 class="font-bold text-lg">Imagenes Recortadas</h3>
-                                <p class="text-md">La imagen proviene del dispositivo local</p>
-                            </div>
-                            <div class="container mx-auto flex justify-center mt-10 mb-6">
-                                <img id="imagenRecortada" src="" alt="Imagen recortada" style="display: none;">
+                            <div class="Modal-Imagenes">
                             </div>
                         </div>
-                        <div class="Modal-Imagenes">
+                    </div>
+                    <div id="Modal-recortar" class="Modal-recortar hidden">
+                        <div class="cropper-container w-full h-80">
+                            <img id="imagenParaRecortar" src="" alt="Imagen para recortar">
+                        </div>
+                        <div class="flex justify-center bottom-0 botones-accion mt-20">
+                            <button onclick="recortarImagen()"
+                                class="bg-blue-500 px-4 py-2 rounded-lg mr-10">Recortar</button>
+                            <button onclick="cancelarRecorte()" class=" bg-blue-500 px-4 py-2
+                                rounded-lg"">Cancelar</button>
                         </div>
                     </div>
-                </div>
-                <div id="Modal-recortar" class="Modal-recortar hidden mt-14">
-                    <div class="cropper-container w-full h-80">
-                        <img id="imagenParaRecortar" src="" alt="Imagen para recortar">
+                    <div class=" loader" id="loader">
+                                <div class="cargando">
+                                    <div class="pelotas"></div>
+                                    <div class="pelotas"></div>
+                                    <div class="pelotas"></div>
+                                    <span class="texto-cargando">Cargando...</span>
+                                </div>
+                        </div>
+                        <div id="Modal-recortado-imagen"
+                            class="hidden items-center mt-20 h-auto flex-row justify-center">
+                        </div>
+
                     </div>
-                    <div
-                        class="flex justify-center bottom-0 botones-accion mt-24 bg-[#e4e4e3] py-[14px] px-5 gap-5 text-md">
-                        <button onclick="cancelarRecorte()"
-                            class="border-[black] border-[1px] px-4 py-2 rounded-lg block w-[40%] uppercase font-bold ">Regresar
-                        </button>
-                        <input type="file" id="inputArchivo" style="display: none;">
-                        <button onclick="recortarImagen()"
-                            class="bg-emerald-400 px-4 py-2 rounded-lg block w-full uppercase font-bold">Confirmar
-                            Recorte <i class="fas fa-cut"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="loader" id="loader">
-                    <div class="cargando">
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <div class="pelotas"></div>
-                        <span class="texto-cargando">Cargando...</span>
-                    </div>
-                </div>
-                <div id="Modal-recortado-imagen" class="hidden items-center mt-20 h-auto flex-row justify-center">
-                </div>
-                <div class="modal-footer mx-4 mt-auto mb-5 text-lg font-bold">
-                    <button class="block w-full py-3 bg-emerald-400 rounded-xl"
-                        onclick="toggleModal()">CANCELAR</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
-    <script>
-        function toggleModal() {
-            var modal = document.getElementById('modal');
-            var modalContenido = document.getElementById('Modal-Body');
-            var modalFooter = document.querySelector('.modal-footer');
-            var modalRecortar = document.getElementById('Modal-recortar');
-            var inputArchivo = document.getElementById('inputArchivo');
-            var imagenParaRecortar = document.getElementById('imagenParaRecortar');
-            var cropper = imagenParaRecortar.cropper;
-            var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
+        <script>
+            function toggleModal() {
+                var divTitulo = document.createElement("div");
+                // Crear un nuevo elemento h3
+                var h3Elemento = document.createElement("h3");
 
-            if (modal.style.display === 'none') {
-                modal.style.display = 'block';
-                modalContenido.style.display = 'block';
-                modalFooter.style.display = 'block';
-                modalRecortar.style.display = 'none';
-                inputArchivo.value = '';
-                cropper.destroy();
-                divImagenRecortada.innerHTML = '';
+                // Establecer el texto del h3
+                h3Elemento.textContent = "Elige tu imagen";
 
-            } else {
-                modal.style.display = 'none';
-                modalContenido.style.display = 'block';
-                modalFooter.style.display = 'block';
-                modalRecortar.style.display = 'none';
-                inputArchivo.value = '';
-                cropper.destroy();
-                divImagenRecortada.innerHTML = '';
-            }
-        }
+                // Agregar el h3 como hijo del div
+                divTitulo.appendChild(h3Elemento);
 
-        function abrirModalRecorte() {
-            var modalContenido = document.getElementById('Modal-Body');
-            var modalFooter = document.querySelector('.modal-footer');
-            var modalRecortar = document.getElementById('Modal-recortar');
-            var inputArchivo = document.getElementById('inputArchivo');
-            var imagenParaRecortar = document.getElementById('imagenParaRecortar');
-            var imagenRecortada = document.getElementById('imagenRecortada');
+                var divImagenRecortada2 = document.getElementById('Modal-recortado-imagen');
+                
+                divImagenRecortada2.appendChild(divTitulo);
+                
+                var modal = document.getElementById('modal');
+                var modalContenido = document.getElementById('Modal-Body');
+                var modalRecortar = document.getElementById('Modal-recortar');
+                var inputArchivo = document.getElementById('inputArchivo');
+                var imagenParaRecortar = document.getElementById('imagenParaRecortar');
+                var cropper = imagenParaRecortar.cropper;
+                var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
 
-            inputArchivo.click();
+                if (modal.style.display === 'none') {
+                    modal.style.display = 'block';
+                    modalContenido.style.display = 'block';
+                    modalRecortar.style.display = 'none';
+                    inputArchivo.value = '';
+                    cropper.destroy();
+                    divImagenRecortada.innerHTML = '';
 
-            inputArchivo.addEventListener('change', function () {
-                var file = this.files[0];
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    imagenParaRecortar.src = e.target.result;
-                    imagenRecortada.src = e.target.result;
-                    modalContenido.style.display = 'none';
-                    modalFooter.style.display = 'none';
-                    modalRecortar.style.display = 'block';
-                    inicializarCropper();
-                };
-
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function inicializarCropper() {
-            var imagenParaRecortar = document.getElementById('imagenParaRecortar');
-            var areaDeRecorte = document.getElementById('areaDeRecorte');
-
-            var cropper = new Cropper(imagenParaRecortar, {
-                aspectRatio: 1,
-                viewMode: 1,
-                crop: function (event) {
-                    console.log(event.detail.x);
-                    console.log(event.detail.y);
-                    console.log(event.detail.width);
-                    console.log(event.detail.height);
+                } else {
+                    modal.style.display = 'none';
+                    modalContenido.style.display = 'block';
+                    modalRecortar.style.display = 'none';
+                    inputArchivo.value = '';
+                    cropper.destroy();
+                    divImagenRecortada.innerHTML = '';
                 }
-            });
-        }
+            }
+
+            function abrirModalRecorte() {
+                var modalContenido = document.getElementById('Modal-Body');
+                var modalRecortar = document.getElementById('Modal-recortar');
+                var inputArchivo = document.getElementById('inputArchivo');
+                var imagenParaRecortar = document.getElementById('imagenParaRecortar');
+                var imagenRecortada = document.getElementById('imagenRecortada');
+
+                inputArchivo.click();
+
+                inputArchivo.addEventListener('change', function () {
+                    var file = this.files[0];
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        imagenParaRecortar.src = e.target.result;
+                        imagenRecortada.src = e.target.result;
+                        modalContenido.style.display = 'none';
+                        modalRecortar.style.display = 'block';
+                        inicializarCropper();
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            function inicializarCropper() {
+                var imagenParaRecortar = document.getElementById('imagenParaRecortar');
+                var areaDeRecorte = document.getElementById('areaDeRecorte');
+
+                var cropper = new Cropper(imagenParaRecortar, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    crop: function (event) {
+                        console.log(event.detail.x);
+                        console.log(event.detail.y);
+                        console.log(event.detail.width);
+                        console.log(event.detail.height);
+                    }
+                });
+            }
 
         function recortarImagen() {
             var imagenParaRecortar = document.getElementById('imagenParaRecortar');
@@ -360,31 +344,29 @@
                 var cropper = imagenParaRecortar.cropper;
 
 
-            cropper.getCroppedCanvas().toBlob(function (blob) {
-                var url = URL.createObjectURL(blob);
-                var archivoRecortado = new File([blob], 'imagen_recortada.png', { type: 'image/png' });
+                cropper.getCroppedCanvas().toBlob(function (blob) {
+                    var url = URL.createObjectURL(blob);
+                    var archivoRecortado = new File([blob], 'imagen_recortada.png', { type: 'image/png' });
 
+                    modalRecortar.style.display = 'none';
+                    modalRecortadoImagen.style.display = 'block'
+                    QuitarFondo(archivoRecortado);
+                });
+                modalRecortadoImagen.divTitulo.appendChild(h3Elemento);
+                
+            }
+
+            function cancelarRecorte() {
+                var modalContenido = document.getElementById('Modal-Body');
+                var modalRecortar = document.getElementById('Modal-recortar');
+                var inputArchivo = document.getElementById('inputArchivo');
+                var imagenParaRecortar = document.getElementById('imagenParaRecortar');
+                var cropper = imagenParaRecortar.cropper;
+                cropper.destroy();
+                inputArchivo.value = '';
+                modalContenido.style.display = 'block';
                 modalRecortar.style.display = 'none';
-                modalRecortadoImagen.style.display = 'block';
-                //Se comento el quitar fondo porque se acabaron los intentos con la api
-                QuitarFondo(archivoRecortado);
-                // detectarRostros(archivoRecortado);
-            });
-        }
-
-        function cancelarRecorte() {
-            var modalContenido = document.getElementById('Modal-Body');
-            var modalFooter = document.querySelector('.modal-footer');
-            var modalRecortar = document.getElementById('Modal-recortar');
-            var inputArchivo = document.getElementById('inputArchivo');
-            var imagenParaRecortar = document.getElementById('imagenParaRecortar');
-            var cropper = imagenParaRecortar.cropper;
-            cropper.destroy();
-            inputArchivo.value = '';
-            modalContenido.style.display = 'block';
-            modalFooter.style.display = 'block';
-            modalRecortar.style.display = 'none';
-        }
+            }
 
         function QuitarFondo(archivo) {
             document.getElementById('loader').style.display = 'block';
@@ -427,90 +409,90 @@
                 formData.append("image_file", archivo);
                 formData.append("sync", 1);
 
-            fetch(url, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "X-API-Key": apiKey
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data); // Imprimir la respuesta JSON
-                    var imageBlob = data.data.image;
-                    console.log(data.data.image);
-                    detectarRostros(imageBlob);
-                })
-                .catch(error => {
-                    document.getElementById('loader').style.display = 'none';
-                    console.error('Error al procesar la solicitud:', error);
-                });
-        }
-        function detectarRostros(archivo) {
-            document.getElementById('loader').style.display = 'block';
-
-            var url = "https://api-us.faceplusplus.com/facepp/v3/detect";
-            var apiKey = "9ngH8vQI0AjLUQu2fcVk1UuzUHWxMz2Z";
-            var apiSecret = "3_b25nUZNIoxp-4ab_BWoTejb_9GvYeZ";
-
-            var formData = new FormData();
-            formData.append("api_key", apiKey);
-            formData.append("api_secret", apiSecret);
-            formData.append("image_url", archivo);
-            formData.append("return_landmark", 2);
-            formData.append("return_attributes", "headpose,blur");
-
-            fetch(url, {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('loader').style.display = 'none';
-
-                    if (data.face_num > 0) {
-                        console.log(data);
-                        for (var j = 0; j < data.faces.length; j++) {
-                            const face = data.faces[j];
-                            const faceRectangle = face.face_rectangle;
-                            const rostro = {
-                                top: faceRectangle.top - 150,
-                                left: faceRectangle.left - 30,
-                                width: faceRectangle.width + 50,
-                                height: faceRectangle.height + 150
-                            };
-                            console.log(rostro);
-                            recortarImagenFinal(archivo, rostro);
-                        }
-                    } else {
-                        console.log('No se detectaron rostros en la imagen.');
+                fetch(url, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-API-Key": apiKey
                     }
                 })
-                .catch(error => {
-                    document.getElementById('loader').style.display = 'none';
-                    console.error('Error al procesar la solicitud:', error);
-                });
-        }
-        function recortarImagenFinal(archivo, rostro) {
-            fetch(archivo)
-                .then(response => response.blob())
-                .then(blob => {
-                    var reader = new FileReader();
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data); // Imprimir la respuesta JSON
+                        var imageBlob = data.data.image;
+                        console.log(data.data.image);
+                        detectarRostros(imageBlob);
+                    })
+                    .catch(error => {
+                        document.getElementById('loader').style.display = 'none';
+                        console.error('Error al procesar la solicitud:', error);
+                    });
+            }
+            function detectarRostros(archivo) {
+                document.getElementById('loader').style.display = 'block';
 
-                    reader.onload = function (e) {
-                        var imagenOriginal = new Image();
-                        imagenOriginal.src = e.target.result;
+                var url = "https://api-us.faceplusplus.com/facepp/v3/detect";
+                var apiKey = "9ngH8vQI0AjLUQu2fcVk1UuzUHWxMz2Z";
+                var apiSecret = "3_b25nUZNIoxp-4ab_BWoTejb_9GvYeZ";
 
-                        imagenOriginal.onload = function () {
-                            var lienzo = document.createElement("canvas");
-                            lienzo.width = rostro.width;
-                            lienzo.height = rostro.height;
-                            var contexto = lienzo.getContext("2d");
-                            contexto.drawImage(imagenOriginal, rostro.left, rostro.top, rostro.width, rostro.height, 0, 0, rostro.width, rostro.height);
+                var formData = new FormData();
+                formData.append("api_key", apiKey);
+                formData.append("api_secret", apiSecret);
+                formData.append("image_url", archivo);
+                formData.append("return_landmark", 2);
+                formData.append("return_attributes", "headpose,blur");
 
-                            var imagenRecortada = new Image();
-                            imagenRecortada.src = lienzo.toDataURL();
-                            imagenRecortada.classList.add('w-full', 'h-32')
+                fetch(url, {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('loader').style.display = 'none';
+
+                        if (data.face_num > 0) {
+                            console.log(data);
+                            for (var j = 0; j < data.faces.length; j++) {
+                                const face = data.faces[j];
+                                const faceRectangle = face.face_rectangle;
+                                const rostro = {
+                                    top: faceRectangle.top - 150,
+                                    left: faceRectangle.left - 30,
+                                    width: faceRectangle.width + 50,
+                                    height: faceRectangle.height + 150
+                                };
+                                console.log(rostro);
+                                recortarImagenFinal(archivo, rostro);
+                            }
+                        } else {
+                            console.log('No se detectaron rostros en la imagen.');
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById('loader').style.display = 'none';
+                        console.error('Error al procesar la solicitud:', error);
+                    });
+            }
+            function recortarImagenFinal(archivo, rostro) {
+                fetch(archivo)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            var imagenOriginal = new Image();
+                            imagenOriginal.src = e.target.result;
+
+                            imagenOriginal.onload = function () {
+                                var lienzo = document.createElement("canvas");
+                                lienzo.width = rostro.width;
+                                lienzo.height = rostro.height;
+                                var contexto = lienzo.getContext("2d");
+                                contexto.drawImage(imagenOriginal, rostro.left, rostro.top, rostro.width, rostro.height, 0, 0, rostro.width, rostro.height);
+
+                                var imagenRecortada = new Image();
+                                imagenRecortada.src = lienzo.toDataURL();
+                                imagenRecortada.classList.add('w-32', 'h-36')
 
                             var divRostro = document.createElement("div");
                             divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]');
@@ -550,7 +532,7 @@
 
 
 
-    </script>
+        </script>
 </body>
 
 </html>
