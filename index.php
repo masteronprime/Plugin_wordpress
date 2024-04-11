@@ -196,8 +196,8 @@
         transform: translate(-50%, -100%);
         background-position-y: bottom;
         left: 51.2258%;
-        top: 48.3892%;
-        width: 15.3219%;
+        top: 44.3892%;
+        width: 20.3219%;
         height: 44.1827%
     }
 
@@ -286,7 +286,7 @@
                     <h5>Hola</h5>
                 </div>
                 <div id="Modal-imagen-seleccionada" class="hidden items-center h-auto m-auto">
-                    <h3>Escoge tu personaje favorito</h3>
+                    <h3 class="text-center font-bold text-lg">Escoge tu personaje favorito</h3>
                     
                 </div>
                 <div class="modal-footer mx-4 mt-auto mb-5 text-lg font-bold">
@@ -541,8 +541,8 @@
                                     console.log('SRC de la imagen clickeada:', src);
 
                                     if (src) {
-
-                                        var divModalImagenPersonaje=document.querySelector('.Modal-imagen-seleccionada');
+                                        var modalRecortadoImagen= document.getElementById('Modal-recortado-imagen');
+                                        var divModalImagenPersonaje=document.querySelector('#Modal-imagen-seleccionada');
 
                                         var divContenedorGridImagenesPersonaje = document.createElement("div");
 
@@ -556,7 +556,7 @@
 
                                         imagenBodyPersonaje.src='https://spic.qn.cdn.imaiyuan.com/new-mini-me/154.png?imageView2/0/w/600/h/600/interlace/1|imageslim';
 
-                                        imagenBodyPersonaje.classList.add('absolute','max-w-full','max-h-full','h-full','bottom-0')
+                                        imagenBodyPersonaje.classList.add('max-w-full','max-h-full','h-full','bottom-0')
 
                                         var imagenRostroPersonaje = document.createElement("div");
 
