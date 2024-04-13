@@ -249,8 +249,8 @@
                             <div class="mx-5 mt-10">
                                 <h3 class="font-bold text-lg">Imagenes Recortadas</h3>
                                 <p class="text-md">La imagen proviene del dispositivo local</p>
-                                <div class="grid grid-cols-10">
-                                    <img class="imagen-recortada-1">
+                                <div class="grid grid-cols-5 imagenes-prevRecortadas">
+                                    
                                 </div>
                             </div>
                             <div class="container mx-auto flex justify-center mt-10 mb-6">
@@ -303,9 +303,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
     <script>
-        var imagenPrevRecortada=document.querySelector('.imagen-recortada-1');
-        var srcImagenRecorteSeleccionada=localStorage.getItem("srcRostroElegido");
-        console.log(srcImagenRecorteSeleccionada);
+        // var imagenPrevRecortada=document.querySelector('.imagen-recortada-1');
+        // var srcImagenRecorteSeleccionada=localStorage.getItem("srcRostroElegido");
+        // console.log(srcImagenRecorteSeleccionada);
 
         function asignarValorImagenPrevRecortada(){
             if (typeof imagenRecorteSeleccionada !== 'undefined') {
@@ -559,13 +559,53 @@
                                 if (imagen) {
                                     src = imagen.src;
                                     console.log('SRC de la imagen clickeada:', src);
-                                    
-
-
                                     if (src) {
                                         //Guardar en Local Storage
                                         localStorage.setItem("srcRostroElegido",src);
-                                        //Logia para recortar imagen y adapatarlo al personaej
+                                        // Recuperar el array de localStorage o inicializar uno nuevo si está vacío
+                                        var srcArray = JSON.parse(localStorage.getItem("srcArray")) || [];
+
+                                        // Agregar el nuevo src al array si aún no está presente
+                                        if (!srcArray.includes(src)) {
+                                        srcArray.push(src);
+                                        }
+
+                                        // Almacenar el array actualizado de nuevo en localStorage
+                                        localStorage.setItem("srcArray", JSON.stringify(srcArray));
+
+                                        // Para recuperar el array de localStorage en otro momento
+                                        var storedSrcArray = JSON.parse(localStorage.getItem("srcArray"));
+
+                                        // Seleccionar el contenedor donde se mostrarán las imágenes
+                                        var divImagesprevRecortadas = document.querySelector(".imagenes-prevRecortadas");
+
+                                        // Limpiar el contenido actual del contenedor
+                                        divImagesprevRecortadas.innerHTML = '';
+
+                                        // Iterar sobre cada src almacenado en el array
+                                        storedSrcArray.forEach(src => {
+                                            // Crear un elemento <img>
+                                            var imagePrevRecortada = document.createElement("img");
+
+                                            // Asignar el src al atributo src del elemento <img>
+                                            imagePrevRecortada.src = src;
+
+                                            // Agregar clases de estilo si es necesario
+                                            imagePrevRecortada.classList.add("h-full w-full");
+
+                                            // Agregar el elemento <img> al contenedor
+                                            divImagesprevRecortadas.appendChild(imagePrevRecortada);
+                                        });
+
+                                        // //Crear un elemento img
+                                        // var imageprevRecortada=document.createElement("img");
+                                        // imageprevRecortada.src=localStorage.getItem("srcRostroElegido");
+                                        // //Listar imagenes recortadas al inicio
+                                        // var divImagesprevRecortadas=document.querySelector(".imagenes-prevRecortadas");
+
+                                        // divImagesprevRecortadas.appendChild(imageprevRecortada);
+                                        
+                                        //Logica para recortar imagen y adapatarlo al personaej
                                         var modalRecortadoImagen= document.getElementById('Modal-recortado-imagen');
                                         var divModalImagenPersonaje=document.querySelector('#Modal-imagen-seleccionada');
 
@@ -595,6 +635,7 @@
                                         divContenedorGridImagenesPersonaje.appendChild(divContenerImagenPersonaje);
 
                                         divModalImagenPersonaje.appendChild(divContenedorGridImagenesPersonaje);
+
                                         modalRecortadoImagen.style.display='none';
                                         divModalImagenPersonaje.style.display='block';
 
@@ -632,58 +673,80 @@
                     }, 150 * i);
                 }
             }
-            function getImageSeleccionada(){
-                var src;
-                const rostros = document.querySelectorAll('.rostro');
-                rostros.forEach(rostro => {
-                    rostro.addEventListener('click', () => {
-                        const imagen = rostro.querySelector('img');
-                        src = imagen.src;
-                        console.log('SRC de la imagen clickeada:', src);
-                        // Puedes utilizar el valor de src como desees aquí
-                    });
-                });
-                console.log("Mi src es:"+src);
-                if (src) {
+            // function getImageSeleccionada(){
+            //     var src;
+            //     const rostros = document.querySelectorAll('.rostro');
+            //     rostros.forEach(rostro => {
+            //         rostro.addEventListener('click', () => {
+            //             const imagen = rostro.querySelector('img');
+            //             src = imagen.src;
+            //             console.log('SRC de la imagen clickeada:', src);
+            //             // Puedes utilizar el valor de src como desees aquí
+            //         });
+            //     });
+            //     console.log("Mi src es:"+src);
+            //     if (src) {
 
-                    var divModalImagenPersonaje=document.querySelector('.Modal-imagen-seleccionada');
+            //         var divModalImagenPersonaje=document.querySelector('.Modal-imagen-seleccionada');
 
-                    var divContenedorGridImagenesPersonaje = document.createElement("div");
+            //         var divContenedorGridImagenesPersonaje = document.createElement("div");
 
-                    divContenedorGridImagenesPersonaje.classList.add('contenedor-rostro-personaje');
+            //         divContenedorGridImagenesPersonaje.classList.add('contenedor-rostro-personaje');
 
-                    var divContenerImagenPersonaje=document.createElement("div");
+            //         var divContenerImagenPersonaje=document.createElement("div");
 
-                    divContenerImagenPersonaje.classList.add('relative','flex','justify-center','overflow-hidden','w-full','h-full');
+            //         divContenerImagenPersonaje.classList.add('relative','flex','justify-center','overflow-hidden','w-full','h-full');
 
-                    var imagenBodyPersonaje = document.createElement("img");
+            //         var imagenBodyPersonaje = document.createElement("img");
                     
-                    imagenBodyPersonaje.src='https://spic.qn.cdn.imaiyuan.com/new-mini-me/154.png?imageView2/0/w/600/h/600/interlace/1|imageslim';
+            //         imagenBodyPersonaje.src='https://spic.qn.cdn.imaiyuan.com/new-mini-me/154.png?imageView2/0/w/600/h/600/interlace/1|imageslim';
 
-                    imagenBodyPersonaje.classList.add('absolute','max-w-full','max-h-full','h-full','bottom-0')
+            //         imagenBodyPersonaje.classList.add('absolute','max-w-full','max-h-full','h-full','bottom-0')
 
-                    var imagenRostroPersonaje = document.createElement("div");
+            //         var imagenRostroPersonaje = document.createElement("div");
                     
-                    imagenRostroPersonaje.style.backgroundImage = `url(${src})`;
+            //         imagenRostroPersonaje.style.backgroundImage = `url(${src})`;
 
-                    imagenRostroPersonaje.classList.add('imagen-rostro-adaptada');
+            //         imagenRostroPersonaje.classList.add('imagen-rostro-adaptada');
                     
-                    divContenerImagenPersonaje.appendChild(imagenBodyPersonaje);
-                    divContenerImagenPersonaje.appendChild(imagenRostroPersonaje);
+            //         divContenerImagenPersonaje.appendChild(imagenBodyPersonaje);
+            //         divContenerImagenPersonaje.appendChild(imagenRostroPersonaje);
 
-                    divContenedorGridImagenesPersonaje.appendChild(divContenerImagenPersonaje);
+            //         divContenedorGridImagenesPersonaje.appendChild(divContenerImagenPersonaje);
 
-                    divModalImagenPersonaje.appendChild(divContenedorGridImagenesPersonaje);
-                    modalRecortadoImagen.style.display='none';
-                    divModalImagenPersonaje.style.display='block';
+            //         divModalImagenPersonaje.appendChild(divContenedorGridImagenesPersonaje);
+            //         modalRecortadoImagen.style.display='none';
+            //         divModalImagenPersonaje.style.display='block';
                 
-                } else {
-                }
-            }
+            //     } else {
+            //     }
+            // }
             animarTexto();
-            getImageSeleccionada();
+            getImagesRecortadas();
+            // getImageSeleccionada();
         });
 
+        function getImagesRecortadas(){
+
+            var divImagesprevRecortadas = document.querySelector(".imagenes-prevRecortadas");
+
+            var storedSrcArray = JSON.parse(localStorage.getItem("srcArray")) || [];
+
+            storedSrcArray.forEach(src => {
+                // Crear un nuevo elemento <img>
+                var imagePrevRecortada = document.createElement("img");
+
+                // Asignar el src al atributo src del elemento <img>
+                imagePrevRecortada.src = src;
+
+                // Agregar clases de estilo si es necesario
+                imagePrevRecortada.classList.add("h-full");
+
+                // Agregar el elemento <img> al contenedor
+                divImagesprevRecortadas.appendChild(imagePrevRecortada);
+            });
+
+        }
 
 
     </script>
