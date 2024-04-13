@@ -123,12 +123,13 @@
         animation-delay: .37s;
     }
 
-    .rostro {
+    .rostro,
+    .div-rostro-recortado {
         background-image: url('./fondo_transparente.jpg');
         background-position: center;
         background-repeat: no-repeat;
-        border: 3px solid #10B981;
-        border-radius: 20px;
+        border: 2px solid #10B981;
+        border-radius: 10px;
         padding-left: 10px;
         padding-right: 10px;
         padding-top: 10px;
@@ -218,19 +219,19 @@
         <div class="w-full h-full" style="background: rgba(0, 0, 0, .65); animation: mask .2s linear;">
             <div class="Modal md:m-auto w-full h-full absolute inset-0 overflow-hidden shadow-lg rounded-lg animate-bubbles z-[999999] flex flex-col"
                 style="width: 500px; height: 600px; z-index: 99999;">
-                <div class="Modal-Contenido">
-                    <div class="Modal-Header bg-emerald-400">
-                        <div class="Header-icono-Cerrar" onclick="toggleModal()"><svg viewBox="0 0 30 30"
-                                style="width: 30px; height: 30px;" fill="white">
-                                <path
-                                    d="M15,12.8786797 L21.9393398,5.93933983 C22.5251263,5.35355339 23.4748737,5.35355339 24.0606602,5.93933983 C24.6464466,6.52512627 24.6464466,7.47487373 24.0606602,8.06066017 L17.1213203,15 L24.0606602,21.9393398 C24.6464466,22.5251263 24.6464466,23.4748737 24.0606602,24.0606602 C23.4748737,24.6464466 22.5251263,24.6464466 21.9393398,24.0606602 L15,17.1213203 L8.06066017,24.0606602 C7.47487373,24.6464466 6.52512627,24.6464466 5.93933983,24.0606602 C5.35355339,23.4748737 5.35355339,22.5251263 5.93933983,21.9393398 L12.8786797,15 L5.93933983,8.06066017 C5.35355339,7.47487373 5.35355339,6.52512627 5.93933983,5.93933983 C6.52512627,5.35355339 7.47487373,5.35355339 8.06066017,5.93933983 L15,12.8786797 Z">
-                                </path>
-                            </svg></div>
-                        <div class="Header-Titulo">
-                            <p class="Texto-Titulo font-bold text-xl">Elige tus <span id="texto-animado"
-                                    class="Texto-Titulo font-bold text-xl text-white"></span> </p>
-                        </div>
+                <div class="Modal-Header bg-emerald-400">
+                    <div class="Header-icono-Cerrar" onclick="toggleModal()"><svg viewBox="0 0 30 30"
+                            style="width: 30px; height: 30px;" fill="white">
+                            <path
+                                d="M15,12.8786797 L21.9393398,5.93933983 C22.5251263,5.35355339 23.4748737,5.35355339 24.0606602,5.93933983 C24.6464466,6.52512627 24.6464466,7.47487373 24.0606602,8.06066017 L17.1213203,15 L24.0606602,21.9393398 C24.6464466,22.5251263 24.6464466,23.4748737 24.0606602,24.0606602 C23.4748737,24.6464466 22.5251263,24.6464466 21.9393398,24.0606602 L15,17.1213203 L8.06066017,24.0606602 C7.47487373,24.6464466 6.52512627,24.6464466 5.93933983,24.0606602 C5.35355339,23.4748737 5.35355339,22.5251263 5.93933983,21.9393398 L12.8786797,15 L5.93933983,8.06066017 C5.35355339,7.47487373 5.35355339,6.52512627 5.93933983,5.93933983 C6.52512627,5.35355339 7.47487373,5.35355339 8.06066017,5.93933983 L15,12.8786797 Z">
+                            </path>
+                        </svg></div>
+                    <div class="Header-Titulo">
+                        <p class="Texto-Titulo font-bold text-xl">Elige tus <span id="texto-animado"
+                                class="Texto-Titulo font-bold text-xl text-white"></span> </p>
                     </div>
+                </div>
+                <div class="Modal-Contenido overflow-y-scroll">
                     <div id="Modal-Body" class="Modal-Body block">
                         <div class="Modal-Body-Botones">
                             <div class="container mx-auto mt-10 items-center w-[80%] bg-[#e4e4e3] rounded-lg py-4 Boton-Upload hover:scale-105">
@@ -249,7 +250,7 @@
                             <div class="mx-5 mt-10">
                                 <h3 class="font-bold text-lg">Imagenes Recortadas</h3>
                                 <p class="text-md">La imagen proviene del dispositivo local</p>
-                                <div class="grid grid-cols-5 imagenes-prevRecortadas">
+                                <div class="grid grid-cols-5 gap-5 imagenes-prevRecortadas">
                                     
                                 </div>
                             </div>
@@ -258,6 +259,10 @@
                             </div>
                         </div>
                         <div class="Modal-Imagenes">
+                        </div>
+                        <div class="modal-footer mx-4 mt-auto mb-5 text-lg font-bold">
+                            <button class="block w-full py-3 bg-emerald-400 rounded-xl"
+                                onclick="toggleModal()">CANCELAR</button>
                         </div>
                     </div>
                 </div>
@@ -285,17 +290,13 @@
                         <span class="texto-cargando">Cargando...</span>
                     </div>
                 </div>
-                <div id="Modal-recortado-imagen" class="hidden items-center h-auto flex-row justify-center">
-                    <h5>Hola</h5>
+                <div id="Modal-recortado-imagen" class="hidden items-center h-auto flex-row justify-center overflow-y-scroll">
                 </div>
                 <div id="Modal-imagen-seleccionada" class="hidden items-center h-auto m-auto">
                     <h3 class="text-center font-bold text-lg">Escoge tu personaje favorito</h3>
-                    
+                    <div class="contenedor-rostro-personaje"></div>
                 </div>
-                <div class="modal-footer mx-4 mt-auto mb-5 text-lg font-bold">
-                    <button class="block w-full py-3 bg-emerald-400 rounded-xl"
-                        onclick="toggleModal()">CANCELAR</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -584,17 +585,21 @@
 
                                         // Iterar sobre cada src almacenado en el array
                                         storedSrcArray.forEach(src => {
-                                            // Crear un elemento <img>
+                                            var divRostroRecortado=document.createElement("div");
+                                            divRostroRecortado.classList.add('div-rostro-recortado','h-auto','m-auto','items-center')
+                                            // Crear un nuevo elemento <img>
                                             var imagePrevRecortada = document.createElement("img");
 
                                             // Asignar el src al atributo src del elemento <img>
                                             imagePrevRecortada.src = src;
 
                                             // Agregar clases de estilo si es necesario
-                                            imagePrevRecortada.classList.add("h-full w-full");
+                                            imagePrevRecortada.classList.add("h-1/2");
 
+                                            //Agregar Imagenes a un div de la imagen
+                                            divRostroRecortado.appendChild(imagePrevRecortada);
                                             // Agregar el elemento <img> al contenedor
-                                            divImagesprevRecortadas.appendChild(imagePrevRecortada);
+                                            divImagesprevRecortadas.appendChild(divRostroRecortado);
                                         });
 
                                         // //Crear un elemento img
@@ -609,9 +614,9 @@
                                         var modalRecortadoImagen= document.getElementById('Modal-recortado-imagen');
                                         var divModalImagenPersonaje=document.querySelector('#Modal-imagen-seleccionada');
 
-                                        var divContenedorGridImagenesPersonaje = document.createElement("div");
-
-                                        divContenedorGridImagenesPersonaje.classList.add('contenedor-rostro-personaje');
+                                        var divContenedorGridImagenesPersonaje = document.querySelector(".contenedor-rostro-personaje");
+                                        
+                                        divContenedorGridImagenesPersonaje.innerHTML = '';
 
                                         var divContenerImagenPersonaje=document.createElement("div");
 
@@ -728,11 +733,14 @@
 
         function getImagesRecortadas(){
 
+
             var divImagesprevRecortadas = document.querySelector(".imagenes-prevRecortadas");
 
             var storedSrcArray = JSON.parse(localStorage.getItem("srcArray")) || [];
 
             storedSrcArray.forEach(src => {
+                var divRostroRecortado=document.createElement("div");
+                divRostroRecortado.classList.add('div-rostro-recortado','h-auto','m-auto','items-center')
                 // Crear un nuevo elemento <img>
                 var imagePrevRecortada = document.createElement("img");
 
@@ -740,10 +748,12 @@
                 imagePrevRecortada.src = src;
 
                 // Agregar clases de estilo si es necesario
-                imagePrevRecortada.classList.add("h-full");
+                imagePrevRecortada.classList.add("h-1/2");
 
+                //Agregar Imagenes a un div de la imagen
+                divRostroRecortado.appendChild(imagePrevRecortada);
                 // Agregar el elemento <img> al contenedor
-                divImagesprevRecortadas.appendChild(imagePrevRecortada);
+                divImagesprevRecortadas.appendChild(divRostroRecortado);
             });
 
         }
