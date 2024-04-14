@@ -292,7 +292,7 @@
                 </div>
                 <div id="Modal-recortado-imagen" class="hidden items-center h-auto flex-row justify-center overflow-y-scroll">
                 </div>
-                <div id="Modal-imagen-seleccionada" class="hidden items-center h-auto m-auto">
+                <div id="Modal-imagen-seleccionada" class="hidden items-center mx-auto mt-10">
                     <h3 class="text-center font-bold text-lg">Escoge tu personaje favorito</h3>
                     <div class="contenedor-rostro-personaje"></div>
                 </div>
