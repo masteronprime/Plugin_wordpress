@@ -74,7 +74,7 @@
     .Modal-Body-Botones {
         margin-bottom: 20px;
         overflow: hidden;
-        background: #fff;
+        background: #f2f3f6;
         border-radius: 6px;
     }
 
@@ -132,14 +132,24 @@
         background-image: url('./fondo_transparente.jpg');
         background-position: center;
         background-repeat: no-repeat;
-        border: 2px solid #10B981;
+        border: 2px solid #c0c4cc;
         border-radius: 10px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 6px 6px rgba(0, 0, 0, 0.08);
+        cursor:pointer;
+    }
+
+    .rostro{
         padding-left: 10px;
         padding-right: 10px;
         padding-top: 10px;
         padding-bottom: 10px;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 6px 6px rgba(0, 0, 0, 0.08);
-        cursor:pointer;
+    }
+
+    .div-rostro-recortado{
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     @keyframes salto {
@@ -256,7 +266,7 @@
                             <div class="mx-5 mt-10">
                                 <h3 class="font-bold text-lg">Imagenes Recortadas</h3>
                                 <p class="text-md pb-4">La imagen proviene del dispositivo local</p>
-                                <div class="grid grid-cols-5 gap-4 imagenes-prevRecortadas">
+                                <div class="grid grid-cols-4 gap-4 imagenes-prevRecortadas">
                                     
                                 </div>
                             </div>
@@ -782,22 +792,35 @@
 
             var divImagesprevRecortadas = document.querySelector(".imagenes-prevRecortadas");
 
+
+            
             var storedSrcArray = JSON.parse(localStorage.getItem("srcArray")) || [];
 
             storedSrcArray.forEach(src => {
                 var divRostroRecortado=document.createElement("div");
-                divRostroRecortado.classList.add('div-rostro-recortado','h-auto','m-auto','items-center');
+                divRostroRecortado.classList.add('div-rostro-recortado','h-[100px]',"w-[100px]",'m-auto','items-center','relative');
+                var iconoCloseImageRecortada= document.createElement("i");
+                iconoCloseImageRecortada.classList.add("fas","fa-times-circle");
+                // Crear elemento de icono de cierre
+
+                var divIconoClose=document.createElement("div");
+                divIconoClose.classList.add("absolute","w-[20px]","h-[20px]","-top-[8px]","-right-[8px]")
+                divIconoClose.appendChild(iconoCloseImageRecortada)
+
                 // Crear un nuevo elemento <img>
-                var imagePrevRecortada = document.createElement("img");
+                var imagePrevRecortada = document.createElement("div"); 
 
                 // Asignar el src al atributo src del elemento <img>
-                imagePrevRecortada.src = src;
+                imagePrevRecortada.style.backgroundImage = `url(${src})`;
 
                 // Agregar clases de estilo si es necesario
-                imagePrevRecortada.classList.add("h-1/2");
+                imagePrevRecortada.classList.add("w-full","h-full","bg-center","bg-no-repeat","cursor-pointer","bg-contain"),
+
+                // imagePrevRecortada.classList.add("h-1/2");
 
                 //Agregar Imagenes a un div de la imagen
                 divRostroRecortado.appendChild(imagePrevRecortada);
+                divRostroRecortado.appendChild(divIconoClose);
                 // Agregar el elemento <img> al contenedor
                 divImagesprevRecortadas.appendChild(divRostroRecortado);
             });
