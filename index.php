@@ -197,8 +197,8 @@
         background-size: contain;
         transform: translate(-50%, -100%);
         background-position-y: bottom;
-        left: 51.2258%;
-        top: 44.3892%;
+        left: 50%;
+        top: 46.3892%;
         width: 20.3219%;
         height: 44.1827%
     }
@@ -220,7 +220,7 @@
         <div class="w-full h-full" style="background: rgba(0, 0, 0, .65); animation: mask .2s linear;">
             <div class="Modal md:m-auto w-full h-full absolute inset-0 overflow-hidden shadow-lg rounded-lg animate-bubbles z-[999999] flex flex-col"
                 style="width: 500px; height: 600px; z-index: 99999;">
-                <div class="Modal-Header bg-emerald-400">
+                <div class="Modal-Header bg-emerald-400 py-2">
                     <div class="Header-icono-Cerrar" onclick="toggleModal()"><svg viewBox="0 0 30 30"
                             style="width: 30px; height: 30px;" fill="white">
                             <path
@@ -445,7 +445,8 @@
                 // Pasada API Key Prueba
                 // var apiKey = "wxackhnzvcg57j2yy";
                 // Nueva API Key Prueba
-                var apiKey = "wxlh0wryx94rglssn";
+                // var apiKey = "wxlh0wryx94rglssn"
+                var apiKey="wxxnysw0j2eqnku6r";
                 var formData = new FormData();
                 formData.append("image_file", archivo);
                 formData.append("sync", 1);
@@ -603,7 +604,15 @@
                                         // var divImagesprevRecortadas=document.querySelector(".imagenes-prevRecortadas");
 
                                         // divImagesprevRecortadas.appendChild(imageprevRecortada);
-                                        
+                                        const srcArrayURLBody = [
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/154.png?imageView2/0/w/600/h/600/interlace/1|imageslim',
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/156.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/110.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/184-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1275-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1278-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim'
+                                            // Agrega más URLs de imágenes aquí...
+                                        ];
                                         //Logica para recortar imagen y adapatarlo al personaej
                                         var modalRecortadoImagen= document.getElementById('Modal-recortado-imagen');
                                         var divModalImagenPersonaje=document.querySelector('#Modal-imagen-seleccionada');
@@ -612,31 +621,52 @@
                                         
                                         divContenedorGridImagenesPersonaje.innerHTML = '';
 
-                                        var divContenerImagenPersonaje=document.createElement("div");
+                                        srcArrayURLBody.forEach(srcBody => {
+                                            // Crea un nuevo contenedor para cada imagen
+                                            var divContenerImagenPersonaje = document.createElement("div");
+                                            divContenerImagenPersonaje.classList.add('relative', 'flex', 'justify-center', 'overflow-hidden', 'w-full', 'h-full');
 
-                                        divContenerImagenPersonaje.classList.add('relative','flex','justify-center','overflow-hidden','w-full','h-full');
+                                            // Crea la imagen del cuerpo del personaje
+                                            var imagenBodyPersonaje = document.createElement("img");
+                                            imagenBodyPersonaje.src = srcBody;
+                                            imagenBodyPersonaje.classList.add('max-w-full', 'max-h-full', 'h-full', 'bottom-0');
 
-                                        var imagenBodyPersonaje = document.createElement("img");
+                                            // Crea un div para la imagen del rostro con el fondo dinámico
+                                            var imagenRostroPersonaje = document.createElement("div");
+                                            imagenRostroPersonaje.style.backgroundImage = `url(${src})`;
+                                            imagenRostroPersonaje.classList.add('imagen-rostro-adaptada');
 
-                                        imagenBodyPersonaje.src='https://spic.qn.cdn.imaiyuan.com/new-mini-me/154.png?imageView2/0/w/600/h/600/interlace/1|imageslim';
+                                            // Agrega la imagen del cuerpo y la del rostro al contenedor
+                                            divContenerImagenPersonaje.appendChild(imagenBodyPersonaje);
+                                            divContenerImagenPersonaje.appendChild(imagenRostroPersonaje);
 
-                                        imagenBodyPersonaje.classList.add('max-w-full','max-h-full','h-full','bottom-0')
+                                            // Agrega el contenedor de la imagen al contenedor principal
+                                            divContenedorGridImagenesPersonaje.appendChild(divContenerImagenPersonaje);
+                                        });
 
-                                        var imagenRostroPersonaje = document.createElement("div");
+                                        // var divContenerImagenPersonaje=document.createElement("div");
+                                        // divContenerImagenPersonaje.classList.add('relative','flex','justify-center','overflow-hidden','w-full','h-full');
 
-                                        imagenRostroPersonaje.style.backgroundImage = `url(${src})`;
+                                        // var imagenBodyPersonaje = document.createElement("img");
+                                        // imagenBodyPersonaje.src='https://spic.qn.cdn.imaiyuan.com/new-mini-me/154.png?imageView2/0/w/600/h/600/interlace/1|imageslim';
+                                        // imagenBodyPersonaje.classList.add('max-w-full','max-h-full','h-full','bottom-0')
 
-                                        imagenRostroPersonaje.classList.add('imagen-rostro-adaptada');
+                                        // var imagenRostroPersonaje = document.createElement("div");
+                                        // imagenRostroPersonaje.style.backgroundImage = `url(${src})`;
+                                        // imagenRostroPersonaje.classList.add('imagen-rostro-adaptada');
 
-                                        divContenerImagenPersonaje.appendChild(imagenBodyPersonaje);
-                                        divContenerImagenPersonaje.appendChild(imagenRostroPersonaje);
+                                        // divContenerImagenPersonaje.appendChild(imagenBodyPersonaje);
+                                        // divContenerImagenPersonaje.appendChild(imagenRostroPersonaje);
 
-                                        divContenedorGridImagenesPersonaje.appendChild(divContenerImagenPersonaje);
+                                        // divContenedorGridImagenesPersonaje.appendChild(divContenerImagenPersonaje);
+
+                                        ///FIN
 
                                         divModalImagenPersonaje.appendChild(divContenedorGridImagenesPersonaje);
 
                                         modalRecortadoImagen.style.display='none';
                                         divModalImagenPersonaje.style.display='block';
+                                        divModalImagenPersonaje.classList.add('overflow-y-auto')
 
                                     } 
                                     else { console.log("nada")}
