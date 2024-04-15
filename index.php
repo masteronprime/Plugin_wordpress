@@ -135,6 +135,7 @@
         padding-top: 10px;
         padding-bottom: 10px;
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 6px 6px rgba(0, 0, 0, 0.08);
+        cursor:pointer;
     }
 
     @keyframes salto {
@@ -249,8 +250,8 @@
                             </div>
                             <div class="mx-5 mt-10">
                                 <h3 class="font-bold text-lg">Imagenes Recortadas</h3>
-                                <p class="text-md">La imagen proviene del dispositivo local</p>
-                                <div class="grid grid-cols-5 gap-5 imagenes-prevRecortadas">
+                                <p class="text-md pb-4">La imagen proviene del dispositivo local</p>
+                                <div class="grid grid-cols-5 gap-4 imagenes-prevRecortadas">
                                     
                                 </div>
                             </div>
@@ -308,13 +309,6 @@
         // var srcImagenRecorteSeleccionada=localStorage.getItem("srcRostroElegido");
         // console.log(srcImagenRecorteSeleccionada);
 
-        function asignarValorImagenPrevRecortada(){
-            if (typeof imagenRecorteSeleccionada !== 'undefined') {
-                if (imagenRecorteSeleccionada) {
-                    imagenPrevRecortada.src= srcImagenRecorteSeleccionada;
-                }
-            }
-        }
 
         function toggleModal() {
             var modal = document.getElementById('modal');
@@ -334,7 +328,7 @@
                 modalRecortar.style.display = 'none';
                 ModalSeleccionadoRostro.style.display='none';
                 inputArchivo.value = '';
-                asignarValorImagenPrevRecortada();
+                // asignarValorImagenPrevRecortada();
                 cropper.destroy();
                 divImagenRecortada.innerHTML = '';
 
@@ -345,7 +339,7 @@
                 modalRecortar.style.display = 'none';
                 ModalSeleccionadoRostro.style.display='none';
                 inputArchivo.value = '';
-                asignarValorImagenPrevRecortada();
+                // asignarValorImagenPrevRecortada();
                 cropper.destroy();
                 divImagenRecortada.innerHTML = '';
             }
@@ -545,7 +539,7 @@
                             // divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]','cursor-pointer');
                             // divRostro.appendChild(imagenRecortada);
                             var divRostro = document.createElement("div");
-                            divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]','hover:scale-105','cursor-pointer');
+                            divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]','hover:scale-105');
                             
                             divRostro.appendChild(imagenRecortada);
 
@@ -662,6 +656,7 @@
                     .catch(error => console.error('Error al cargar el archivo:', error));
         }
         document.addEventListener("DOMContentLoaded", function (event) {
+
             var modalRecortadoImagen= document.getElementById('Modal-recortado-imagen');
             var textoAnimado = document.getElementById("texto-animado");
             var texto = "imágenes";
@@ -728,6 +723,8 @@
             // }
             animarTexto();
             getImagesRecortadas();
+
+
             // getImageSeleccionada();
         });
 
@@ -740,7 +737,7 @@
 
             storedSrcArray.forEach(src => {
                 var divRostroRecortado=document.createElement("div");
-                divRostroRecortado.classList.add('div-rostro-recortado','h-auto','m-auto','items-center')
+                divRostroRecortado.classList.add('div-rostro-recortado','h-auto','m-auto','items-center');
                 // Crear un nuevo elemento <img>
                 var imagePrevRecortada = document.createElement("img");
 
@@ -756,7 +753,15 @@
                 divImagesprevRecortadas.appendChild(divRostroRecortado);
             });
 
+            var divRostroRecortado=document.querySelector('.div-rostro-recortado');
+            // console.log(divRostroRecortado);
+
+            divRostroRecortado.onclick = function() {
+                console.log("Imagen Recortada");
+            }
+
         }
+
 
 
     </script>
