@@ -27,6 +27,10 @@
         overflow: hidden;
     }
 
+    .shadow-card-skin{
+        box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px rgba(0, 0, 0, .14), 0 1px 3px rgba(0, 0, 0, .12);
+    }
+
     .Modal {
         font-family: "Rajdhani", sans-serif;
         font-weight: 500;
@@ -159,6 +163,7 @@
         display: grid !important;
         grid-template-columns: 1fr 1fr;
         row-gap: 30px;
+        column-gap:20px;
     }
 
     /* Estilo para el cursor de escritura */
@@ -198,7 +203,7 @@
         transform: translate(-50%, -100%);
         background-position-y: bottom;
         left: 50%;
-        top: 46.3892%;
+        top: 48.3892%;
         width: 20.3219%;
         height: 44.1827%
     }
@@ -232,7 +237,7 @@
                                 class="Texto-Titulo font-bold text-xl text-white"></span> </p>
                     </div>
                 </div>
-                <div class="Modal-Contenido overflow-y-scroll">
+                <div class="Modal-Contenido overflow-y-scroll bg-[#f2f3f6]">
                     <div id="Modal-Body" class="Modal-Body block">
                         <div class="Modal-Body-Botones">
                             <div class="container mx-auto mt-10 items-center w-[80%] bg-[#e4e4e3] rounded-lg py-4 Boton-Upload hover:scale-105">
@@ -291,11 +296,11 @@
                         <span class="texto-cargando">Cargando...</span>
                     </div>
                 </div>
-                <div id="Modal-recortado-imagen" class="hidden items-center h-auto flex-row justify-center overflow-y-scroll">
+                <div id="Modal-recortado-imagen" class="hidden items-center h-auto flex-row justify-center overflow-y-scroll bg-[#f2f3f6]">
                 </div>
-                <div id="Modal-imagen-seleccionada" class="hidden items-center mx-auto mt-10">
-                    <h3 class="text-center font-bold text-lg">Escoge tu personaje favorito</h3>
-                    <div class="contenedor-rostro-personaje"></div>
+                <div id="Modal-imagen-seleccionada" class="hidden items-center mx-auto bg-[#f2f3f6]">
+                    <h3 class="text-center font-bold text-xl py-10">Escoge tu personaje favorito</h3>
+                    <div class="contenedor-rostro-personaje px-5"></div>
                 </div>
 
             </div>
@@ -609,8 +614,22 @@
                                             'https://spic.qn.cdn.imaiyuan.com/new-mini-me/156.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
                                             'https://spic.qn.cdn.imaiyuan.com/new-mini-me/110.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
                                             'https://spic.qn.cdn.imaiyuan.com/new-mini-me/184-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1272-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
                                             'https://assets.sunzi.cool/new-mini-me/1275-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
-                                            'https://assets.sunzi.cool/new-mini-me/1278-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim'
+                                            'https://assets.sunzi.cool/new-mini-me/1277-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1278-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1280-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1281-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1283-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1284-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1285-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1286-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1287-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1288-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1290-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1291-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/005-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1032-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim'     
                                             // Agrega más URLs de imágenes aquí...
                                         ];
                                         //Logica para recortar imagen y adapatarlo al personaej
@@ -624,7 +643,7 @@
                                         srcArrayURLBody.forEach(srcBody => {
                                             // Crea un nuevo contenedor para cada imagen
                                             var divContenerImagenPersonaje = document.createElement("div");
-                                            divContenerImagenPersonaje.classList.add('relative', 'flex', 'justify-center', 'overflow-hidden', 'w-full', 'h-full');
+                                            divContenerImagenPersonaje.classList.add('relative', 'flex', 'justify-center', 'overflow-hidden', 'w-full', 'h-full','bg-white','rounded-2xl','shadow-card-skin');
 
                                             // Crea la imagen del cuerpo del personaje
                                             var imagenBodyPersonaje = document.createElement("img");
@@ -666,7 +685,7 @@
 
                                         modalRecortadoImagen.style.display='none';
                                         divModalImagenPersonaje.style.display='block';
-                                        divModalImagenPersonaje.classList.add('overflow-y-auto')
+                                        divModalImagenPersonaje.classList.add('overflow-y-auto','pb-10')
 
                                     } 
                                     else { console.log("nada")}
