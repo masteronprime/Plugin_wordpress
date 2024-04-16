@@ -36,7 +36,7 @@
         font-weight: 500;
         font-style: normal;
         position: relative;
-        background-color: #fff;
+        background-color: #f2f3f6;
     }
 
     .Modal-Header {
@@ -86,7 +86,7 @@
         margin-top: 100px;
         place-content: center;
         display: none;
-        background-color: #FFF;
+        background-color: #f2f3f6;
         color: #10B981;
         font-family: 'Montserrat', sans-serif;
         font-weight: 800;
@@ -596,18 +596,29 @@
                                         // Iterar sobre cada src almacenado en el array
                                         storedSrcArray.forEach(src => {
                                             var divRostroRecortado=document.createElement("div");
-                                            divRostroRecortado.classList.add('div-rostro-recortado','h-auto','m-auto','items-center')
+                                            divRostroRecortado.classList.add('div-rostro-recortado','h-[100px]',"w-[100px]",'m-auto','items-center','relative');
+                                            var iconoCloseImageRecortada= document.createElement("i");
+                                            iconoCloseImageRecortada.classList.add("fas","fa-times-circle");
+                                            // Crear elemento de icono de cierre
+
+                                            var divIconoClose=document.createElement("div");
+                                            divIconoClose.classList.add("absolute","w-[16px]","h-[16px]","-top-[8px]","-right-[8px]")
+                                            divIconoClose.appendChild(iconoCloseImageRecortada)
+
                                             // Crear un nuevo elemento <img>
-                                            var imagePrevRecortada = document.createElement("img");
+                                            var imagePrevRecortada = document.createElement("div"); 
 
                                             // Asignar el src al atributo src del elemento <img>
-                                            imagePrevRecortada.src = src;
+                                            imagePrevRecortada.style.backgroundImage = `url(${src})`;
 
                                             // Agregar clases de estilo si es necesario
-                                            imagePrevRecortada.classList.add("h-1/2");
+                                            imagePrevRecortada.classList.add("w-full","h-full","bg-center","bg-no-repeat","cursor-pointer","bg-contain"),
+
+                                            // imagePrevRecortada.classList.add("h-1/2");
 
                                             //Agregar Imagenes a un div de la imagen
                                             divRostroRecortado.appendChild(imagePrevRecortada);
+                                            divRostroRecortado.appendChild(divIconoClose);
                                             // Agregar el elemento <img> al contenedor
                                             divImagesprevRecortadas.appendChild(divRostroRecortado);
                                         });
@@ -732,54 +743,7 @@
                     }, 150 * i);
                 }
             }
-            // function getImageSeleccionada(){
-            //     var src;
-            //     const rostros = document.querySelectorAll('.rostro');
-            //     rostros.forEach(rostro => {
-            //         rostro.addEventListener('click', () => {
-            //             const imagen = rostro.querySelector('img');
-            //             src = imagen.src;
-            //             console.log('SRC de la imagen clickeada:', src);
-            //             // Puedes utilizar el valor de src como desees aquí
-            //         });
-            //     });
-            //     console.log("Mi src es:"+src);
-            //     if (src) {
 
-            //         var divModalImagenPersonaje=document.querySelector('.Modal-imagen-seleccionada');
-
-            //         var divContenedorGridImagenesPersonaje = document.createElement("div");
-
-            //         divContenedorGridImagenesPersonaje.classList.add('contenedor-rostro-personaje');
-
-            //         var divContenerImagenPersonaje=document.createElement("div");
-
-            //         divContenerImagenPersonaje.classList.add('relative','flex','justify-center','overflow-hidden','w-full','h-full');
-
-            //         var imagenBodyPersonaje = document.createElement("img");
-                    
-            //         imagenBodyPersonaje.src='https://spic.qn.cdn.imaiyuan.com/new-mini-me/154.png?imageView2/0/w/600/h/600/interlace/1|imageslim';
-
-            //         imagenBodyPersonaje.classList.add('absolute','max-w-full','max-h-full','h-full','bottom-0')
-
-            //         var imagenRostroPersonaje = document.createElement("div");
-                    
-            //         imagenRostroPersonaje.style.backgroundImage = `url(${src})`;
-
-            //         imagenRostroPersonaje.classList.add('imagen-rostro-adaptada');
-                    
-            //         divContenerImagenPersonaje.appendChild(imagenBodyPersonaje);
-            //         divContenerImagenPersonaje.appendChild(imagenRostroPersonaje);
-
-            //         divContenedorGridImagenesPersonaje.appendChild(divContenerImagenPersonaje);
-
-            //         divModalImagenPersonaje.appendChild(divContenedorGridImagenesPersonaje);
-            //         modalRecortadoImagen.style.display='none';
-            //         divModalImagenPersonaje.style.display='block';
-                
-            //     } else {
-            //     }
-            // }
             animarTexto();
             getImagesRecortadas();
 
@@ -792,7 +756,6 @@
 
             var divImagesprevRecortadas = document.querySelector(".imagenes-prevRecortadas");
 
-
             
             var storedSrcArray = JSON.parse(localStorage.getItem("srcArray")) || [];
 
@@ -804,7 +767,7 @@
                 // Crear elemento de icono de cierre
 
                 var divIconoClose=document.createElement("div");
-                divIconoClose.classList.add("absolute","w-[20px]","h-[20px]","-top-[8px]","-right-[8px]")
+                divIconoClose.classList.add("absolute","w-[16px]","h-[16px]","-top-[8px]","-right-[8px]")
                 divIconoClose.appendChild(iconoCloseImageRecortada)
 
                 // Crear un nuevo elemento <img>
