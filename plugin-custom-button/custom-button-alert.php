@@ -294,7 +294,22 @@ function custom_button_shortcode()
     return ob_get_clean(); // Devolver y limpiar el buffer de salida
 }
 add_shortcode('custom_button', 'custom_button_shortcode');
-add_action('woocommerce_register_form', 'custom_button_alert_script');
+
+add_action('woocommerce_before_single_product', 'custom_plugin_logic');
+
+function custom_plugin_logic() {
+    global $product;
+
+    // Obtener las categorías del producto actual
+    $categories = $product->get_category_ids();
+
+    // Verificar si el producto pertenece a la categoría "peluches" (puedes cambiar el nombre de la categoría según tu configuración)
+    if (in_array('peluches', $categories)) {
+        // Ejecutar tu lógica específica para productos de la categoría "peluches"
+        // Por ejemplo, aquí puedes agregar un botón personalizado solo para productos de la categoría "peluches"
+        custom_button_alert_script();
+    }
+}
 
 // Agregar scripts JavaScript
 function custom_button_alert_script()
