@@ -204,27 +204,26 @@ function custom_button_shortcode()
     ?>
     <button onclick="toggleModal()" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Mostrar Div</button>
 
-    <div id="modal" class="w-full h-full z-[999999] justify-center" style="display: block;">
+    <div id="modal" class="w-full h-full z-[999999] justify-center" style="display: none;">
         <div class="w-full h-full" style="background: rgba(0, 0, 0, .65); animation: mask .2s linear;">
             <div class="Modal md:m-auto w-full h-full absolute inset-0 overflow-hidden shadow-lg rounded-lg animate-bubbles z-[999999] flex flex-col"
                 style="width: 500px; height: 600px; z-index: 99999;">
-                <div class="Modal-Contenido">
-                    <div class="Modal-Header bg-emerald-400">
-                        <div class="Header-icono-Cerrar" onclick="toggleModal()"><svg viewBox="0 0 30 30"
-                                style="width: 30px; height: 30px;" fill="white">
-                                <path
-                                    d="M15,12.8786797 L21.9393398,5.93933983 C22.5251263,5.35355339 23.4748737,5.35355339 24.0606602,5.93933983 C24.6464466,6.52512627 24.6464466,7.47487373 24.0606602,8.06066017 L17.1213203,15 L24.0606602,21.9393398 C24.6464466,22.5251263 24.6464466,23.4748737 24.0606602,24.0606602 C23.4748737,24.6464466 22.5251263,24.6464466 21.9393398,24.0606602 L15,17.1213203 L8.06066017,24.0606602 C7.47487373,24.6464466 6.52512627,24.6464466 5.93933983,24.0606602 C5.35355339,23.4748737 5.35355339,22.5251263 5.93933983,21.9393398 L12.8786797,15 L5.93933983,8.06066017 C5.35355339,7.47487373 5.35355339,6.52512627 5.93933983,5.93933983 C6.52512627,5.35355339 7.47487373,5.35355339 8.06066017,5.93933983 L15,12.8786797 Z">
-                                </path>
-                            </svg></div>
-                        <div class="Header-Titulo">
-                            <p class="Texto-Titulo font-bold text-xl">Elige tus <span id="texto-animado"
-                                    class="Texto-Titulo font-bold text-xl text-white"></span> </p>
-                        </div>
+                <div class="Modal-Header bg-emerald-400 py-2">
+                    <div class="Header-icono-Cerrar" onclick="toggleModal()"><svg viewBox="0 0 30 30"
+                            style="width: 30px; height: 30px;" fill="white">
+                            <path
+                                d="M15,12.8786797 L21.9393398,5.93933983 C22.5251263,5.35355339 23.4748737,5.35355339 24.0606602,5.93933983 C24.6464466,6.52512627 24.6464466,7.47487373 24.0606602,8.06066017 L17.1213203,15 L24.0606602,21.9393398 C24.6464466,22.5251263 24.6464466,23.4748737 24.0606602,24.0606602 C23.4748737,24.6464466 22.5251263,24.6464466 21.9393398,24.0606602 L15,17.1213203 L8.06066017,24.0606602 C7.47487373,24.6464466 6.52512627,24.6464466 5.93933983,24.0606602 C5.35355339,23.4748737 5.35355339,22.5251263 5.93933983,21.9393398 L12.8786797,15 L5.93933983,8.06066017 C5.35355339,7.47487373 5.35355339,6.52512627 5.93933983,5.93933983 C6.52512627,5.35355339 7.47487373,5.35355339 8.06066017,5.93933983 L15,12.8786797 Z">
+                            </path>
+                        </svg></div>
+                    <div class="Header-Titulo">
+                        <p class="Texto-Titulo font-bold text-xl">Elige tus <span id="texto-animado"
+                                class="Texto-Titulo font-bold text-xl text-white"></span> </p>
                     </div>
+                </div>
+                <div class="Modal-Contenido overflow-y-scroll bg-[#f2f3f6]">
                     <div id="Modal-Body" class="Modal-Body block">
                         <div class="Modal-Body-Botones">
-                            <div
-                                class="container mx-auto mt-10 items-center w-[80%] bg-[#e4e4e3] rounded-lg py-4 Boton-Upload hover:scale-105">
+                            <div class="container mx-auto mt-10 items-center w-[80%] bg-[#e4e4e3] rounded-lg py-4 Boton-Upload hover:scale-105">
                                 <button type="button" id="btnSubirArchivo"
                                     class="text-black w-80 h-10 rounded-xl mx-auto  font-bold flex gap-10 items-center"
                                     onclick="abrirModalRecorte()">
@@ -239,13 +238,20 @@ function custom_button_shortcode()
                             </div>
                             <div class="mx-5 mt-10">
                                 <h3 class="font-bold text-lg">Imagenes Recortadas</h3>
-                                <p class="text-md">La imagen proviene del dispositivo local</p>
+                                <p class="text-md pb-4">La imagen proviene del dispositivo local</p>
+                                <div class="grid grid-cols-4 gap-4 imagenes-prevRecortadas">
+                                    
+                                </div>
                             </div>
                             <div class="container mx-auto flex justify-center mt-10 mb-6">
                                 <img id="imagenRecortada" src="" alt="Imagen recortada" style="display: none;">
                             </div>
                         </div>
                         <div class="Modal-Imagenes">
+                        </div>
+                        <div class="modal-footer mx-4 mt-auto mb-5 text-lg font-bold">
+                            <button class="block w-full py-3 bg-emerald-400 rounded-xl"
+                                onclick="toggleModal()">CANCELAR</button>
                         </div>
                     </div>
                 </div>
@@ -273,11 +279,13 @@ function custom_button_shortcode()
                         <span class="texto-cargando">Cargando...</span>
                     </div>
                 </div>
-                <div id="Modal-recortado-imagen" class="hidden items-center mt-20 h-auto flex-row justify-center">
+                <div id="Modal-recortado-imagen" class="hidden items-center h-auto flex-row justify-center overflow-y-scroll bg-[#f2f3f6]">
                 </div>
-                <div class="modal-footer mx-4 mt-auto mb-5 text-lg font-bold">
-                    <button class="block w-full py-3 bg-emerald-400 rounded-xl" onclick="toggleModal()">CANCELAR</button>
+                <div id="Modal-imagen-seleccionada" class="hidden items-center mx-auto bg-[#f2f3f6]">
+                    <h3 class="text-center font-bold text-xl py-10">Escoge tu personaje favorito</h3>
+                    <div class="contenedor-rostro-personaje px-5"></div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -286,6 +294,7 @@ function custom_button_shortcode()
     return ob_get_clean(); // Devolver y limpiar el buffer de salida
 }
 add_shortcode('custom_button', 'custom_button_shortcode');
+add_action('woocommerce_register_form', 'custom_button_alert_script');
 
 // Agregar scripts JavaScript
 function custom_button_alert_script()
@@ -294,12 +303,18 @@ function custom_button_alert_script()
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
     <script>
+        // var imagenPrevRecortada=document.querySelector('.imagen-recortada-1');
+        // var srcImagenRecorteSeleccionada=localStorage.getItem("srcRostroElegido");
+        // console.log(srcImagenRecorteSeleccionada);
+
+
         function toggleModal() {
             var modal = document.getElementById('modal');
             var modalContenido = document.getElementById('Modal-Body');
             var modalFooter = document.querySelector('.modal-footer');
             var modalRecortar = document.getElementById('Modal-recortar');
             var inputArchivo = document.getElementById('inputArchivo');
+            var ModalSeleccionadoRostro = document.getElementById('Modal-imagen-seleccionada');
             var imagenParaRecortar = document.getElementById('imagenParaRecortar');
             var cropper = imagenParaRecortar.cropper;
             var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
@@ -309,7 +324,9 @@ function custom_button_alert_script()
                 modalContenido.style.display = 'block';
                 modalFooter.style.display = 'block';
                 modalRecortar.style.display = 'none';
+                ModalSeleccionadoRostro.style.display='none';
                 inputArchivo.value = '';
+                // asignarValorImagenPrevRecortada();
                 cropper.destroy();
                 divImagenRecortada.innerHTML = '';
 
@@ -318,7 +335,9 @@ function custom_button_alert_script()
                 modalContenido.style.display = 'block';
                 modalFooter.style.display = 'block';
                 modalRecortar.style.display = 'none';
+                ModalSeleccionadoRostro.style.display='none';
                 inputArchivo.value = '';
+                // asignarValorImagenPrevRecortada();
                 cropper.destroy();
                 divImagenRecortada.innerHTML = '';
             }
@@ -372,7 +391,6 @@ function custom_button_alert_script()
             var modalRecortar = document.getElementById('Modal-recortar');
             var modalRecortadoImagen = document.getElementById('Modal-recortado-imagen');
             var cropper = imagenParaRecortar.cropper;
-
             cropper.getCroppedCanvas().toBlob(function (blob) {
                 var url = URL.createObjectURL(blob);
                 var archivoRecortado = new File([blob], 'imagen_recortada.png', { type: 'image/png' });
@@ -401,14 +419,35 @@ function custom_button_alert_script()
 
         function QuitarFondo(archivo) {
             document.getElementById('loader').style.display = 'block';
-            var url = "https://techhk.aoscdn.com/api/tasks/visual/segmentation";
-            // Pasada API Key Prueba
-            // var apiKey = "wxackhnzvcg57j2yy";
-            // Nueva API Key Prueba
-            var apiKey = "wx5raadukjhva8sq3";
-            var formData = new FormData();
-            formData.append("image_file", archivo);
-            formData.append("sync", 1);
+                
+                // Crear un nuevo elemento div para que contenga los elementos del rostro
+                var modalRecortadoImagen = document.getElementById('Modal-recortado-imagen');
+                var divContenedorRostro = document.createElement("div");
+
+                divContenedorRostro.classList.add('contenedor-rostro');
+
+                var divTitulo = document.createElement("div");
+                divTitulo.classList.add('text-center', 'py-[32px]' ,'font-bold', 'text-[20px]' ,'uppercase');
+                // Crear un nuevo elemento h3
+                var h3Elemento = document.createElement("h3");
+
+                // Establecer el texto del h3
+                h3Elemento.textContent = "Escoge tu imagen";
+                
+                divTitulo.appendChild(h3Elemento);
+
+                modalRecortadoImagen.appendChild(divTitulo);
+                modalRecortadoImagen.appendChild(divContenedorRostro);
+
+                var url = "https://techhk.aoscdn.com/api/tasks/visual/segmentation";
+                // Pasada API Key Prueba
+                // var apiKey = "wxackhnzvcg57j2yy";
+                // Nueva API Key Prueba
+                // var apiKey = "wxlh0wryx94rglssn"
+                var apiKey="wxxnysw0j2eqnku6r";
+                var formData = new FormData();
+                formData.append("image_file", archivo);
+                formData.append("sync", 1);
 
             fetch(url, {
                 method: "POST",
@@ -495,21 +534,183 @@ function custom_button_alert_script()
                             imagenRecortada.src = lienzo.toDataURL();
                             imagenRecortada.classList.add('w-full', 'h-32')
 
+                            // var divRostro = document.createElement("div");
+                            // divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]','cursor-pointer');
+                            // divRostro.appendChild(imagenRecortada);
                             var divRostro = document.createElement("div");
-                            divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]');
+                            divRostro.classList.add('rostro', 'h-auto', 'm-auto', 'items-center', 'w-[65%]','hover:scale-105');
+                            
                             divRostro.appendChild(imagenRecortada);
 
-                            var divImagenRecortada = document.getElementById('Modal-recortado-imagen');
-                            divImagenRecortada.classList.add('grid');
-                            divImagenRecortada.appendChild(divRostro);
-                            divImagenRecortada.classList.add('grid');
+                            var src;
+
+                            // Agregar el evento onclick al nuevo divRostro
+                            divRostro.onclick = function() {
+                                // Obtener la imagen dentro del divRostro
+                                var imagen = divRostro.querySelector('img');
+                                
+                                // Verificar si se encontró la imagen y obtener su src
+                                if (imagen) {
+                                    src = imagen.src;
+                                    console.log('SRC de la imagen clickeada:', src);
+                                    if (src) {
+                                        //Guardar en Local Storage
+                                        localStorage.setItem("srcRostroElegido",src);
+                                        // Recuperar el array de localStorage o inicializar uno nuevo si está vacío
+                                        var srcArray = JSON.parse(localStorage.getItem("srcArray")) || [];
+
+                                        // Agregar el nuevo src al array si aún no está presente
+                                        if (!srcArray.includes(src)) {
+                                        srcArray.push(src);
+                                        }
+
+                                        // Almacenar el array actualizado de nuevo en localStorage
+                                        localStorage.setItem("srcArray", JSON.stringify(srcArray));
+
+                                        // Para recuperar el array de localStorage en otro momento
+                                        var storedSrcArray = JSON.parse(localStorage.getItem("srcArray"));
+
+                                        // Seleccionar el contenedor donde se mostrarán las imágenes
+                                        var divImagesprevRecortadas = document.querySelector(".imagenes-prevRecortadas");
+
+                                        // Limpiar el contenido actual del contenedor
+                                        divImagesprevRecortadas.innerHTML = '';
+
+                                        // Iterar sobre cada src almacenado en el array
+                                        storedSrcArray.forEach(src => {
+                                            var divRostroRecortado=document.createElement("div");
+                                            divRostroRecortado.classList.add('div-rostro-recortado','h-[100px]',"w-[100px]",'m-auto','items-center','relative');
+                                            var iconoCloseImageRecortada= document.createElement("i");
+                                            iconoCloseImageRecortada.classList.add("fas","fa-times-circle");
+                                            // Crear elemento de icono de cierre
+
+                                            var divIconoClose=document.createElement("div");
+                                            divIconoClose.classList.add("absolute","w-[16px]","h-[16px]","-top-[8px]","-right-[8px]")
+                                            divIconoClose.appendChild(iconoCloseImageRecortada)
+
+                                            // Crear un nuevo elemento <img>
+                                            var imagePrevRecortada = document.createElement("div"); 
+
+                                            // Asignar el src al atributo src del elemento <img>
+                                            imagePrevRecortada.style.backgroundImage = `url(${src})`;
+
+                                            // Agregar clases de estilo si es necesario
+                                            imagePrevRecortada.classList.add("w-full","h-full","bg-center","bg-no-repeat","cursor-pointer","bg-contain"),
+
+                                            // imagePrevRecortada.classList.add("h-1/2");
+
+                                            //Agregar Imagenes a un div de la imagen
+                                            divRostroRecortado.appendChild(imagePrevRecortada);
+                                            divRostroRecortado.appendChild(divIconoClose);
+                                            // Agregar el elemento <img> al contenedor
+                                            divImagesprevRecortadas.appendChild(divRostroRecortado);
+                                        });
+
+                                        // //Crear un elemento img
+                                        // var imageprevRecortada=document.createElement("img");
+                                        // imageprevRecortada.src=localStorage.getItem("srcRostroElegido");
+                                        // //Listar imagenes recortadas al inicio
+                                        // var divImagesprevRecortadas=document.querySelector(".imagenes-prevRecortadas");
+
+                                        // divImagesprevRecortadas.appendChild(imageprevRecortada);
+                                        const srcArrayURLBody = [
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/154.png?imageView2/0/w/600/h/600/interlace/1|imageslim',
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/156.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/110.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/184-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1272-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1275-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1277-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1278-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1280-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1281-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1283-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1284-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1285-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1286-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1287-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1288-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1290-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1291-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://spic.qn.cdn.imaiyuan.com/new-mini-me/005-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim',
+                                            'https://assets.sunzi.cool/new-mini-me/1032-W.png?imageView2/0/w/597/h/597/interlace/1|imageslim'     
+                                            // Agrega más URLs de imágenes aquí...
+                                        ];
+                                        //Logica para recortar imagen y adapatarlo al personaej
+                                        var modalRecortadoImagen= document.getElementById('Modal-recortado-imagen');
+                                        var divModalImagenPersonaje=document.querySelector('#Modal-imagen-seleccionada');
+
+                                        var divContenedorGridImagenesPersonaje = document.querySelector(".contenedor-rostro-personaje");
+                                        
+                                        divContenedorGridImagenesPersonaje.innerHTML = '';
+
+                                        srcArrayURLBody.forEach(srcBody => {
+                                            // Crea un nuevo contenedor para cada imagen
+                                            var divContenerImagenPersonaje = document.createElement("div");
+                                            divContenerImagenPersonaje.classList.add('relative', 'flex', 'justify-center', 'overflow-hidden', 'w-full', 'h-full','bg-white','rounded-2xl','shadow-card-skin');
+
+                                            // Crea la imagen del cuerpo del personaje
+                                            var imagenBodyPersonaje = document.createElement("img");
+                                            imagenBodyPersonaje.src = srcBody;
+                                            imagenBodyPersonaje.classList.add('max-w-full', 'max-h-full', 'h-full', 'bottom-0');
+
+                                            // Crea un div para la imagen del rostro con el fondo dinámico
+                                            var imagenRostroPersonaje = document.createElement("div");
+                                            imagenRostroPersonaje.style.backgroundImage = `url(${src})`;
+                                            imagenRostroPersonaje.classList.add('imagen-rostro-adaptada');
+
+                                            // Agrega la imagen del cuerpo y la del rostro al contenedor
+                                            divContenerImagenPersonaje.appendChild(imagenBodyPersonaje);
+                                            divContenerImagenPersonaje.appendChild(imagenRostroPersonaje);
+
+                                            // Agrega el contenedor de la imagen al contenedor principal
+                                            divContenedorGridImagenesPersonaje.appendChild(divContenerImagenPersonaje);
+                                        });
+
+                                        // var divContenerImagenPersonaje=document.createElement("div");
+                                        // divContenerImagenPersonaje.classList.add('relative','flex','justify-center','overflow-hidden','w-full','h-full');
+
+                                        // var imagenBodyPersonaje = document.createElement("img");
+                                        // imagenBodyPersonaje.src='https://spic.qn.cdn.imaiyuan.com/new-mini-me/154.png?imageView2/0/w/600/h/600/interlace/1|imageslim';
+                                        // imagenBodyPersonaje.classList.add('max-w-full','max-h-full','h-full','bottom-0')
+
+                                        // var imagenRostroPersonaje = document.createElement("div");
+                                        // imagenRostroPersonaje.style.backgroundImage = `url(${src})`;
+                                        // imagenRostroPersonaje.classList.add('imagen-rostro-adaptada');
+
+                                        // divContenerImagenPersonaje.appendChild(imagenBodyPersonaje);
+                                        // divContenerImagenPersonaje.appendChild(imagenRostroPersonaje);
+
+                                        // divContenedorGridImagenesPersonaje.appendChild(divContenerImagenPersonaje);
+
+                                        ///FIN
+
+                                        divModalImagenPersonaje.appendChild(divContenedorGridImagenesPersonaje);
+
+                                        modalRecortadoImagen.style.display='none';
+                                        divModalImagenPersonaje.style.display='block';
+                                        divModalImagenPersonaje.classList.add('overflow-y-auto','pb-10')
+
+                                    } 
+                                    else { console.log("nada")}
+                                } else {
+                                    console.log('No se encontró ninguna imagen dentro de divRostro');
+                                }
+                            };
+
+                            var divImagenRecortada2 = document.querySelector('.contenedor-rostro');
+                            divImagenRecortada2.classList.add('grid');
+                            divImagenRecortada2.appendChild(divRostro);
+                            divImagenRecortada2.classList.add('grid');
+                            };
                         };
-                    };
-                    reader.readAsDataURL(blob);
-                })
-                .catch(error => console.error('Error al cargar el archivo:', error));
+                        reader.readAsDataURL(blob);
+                    })
+                    .catch(error => console.error('Error al cargar el archivo:', error));
         }
         document.addEventListener("DOMContentLoaded", function (event) {
+
+            var modalRecortadoImagen= document.getElementById('Modal-recortado-imagen');
             var textoAnimado = document.getElementById("texto-animado");
             var texto = "imágenes";
             function animarTexto() {
@@ -525,8 +726,59 @@ function custom_button_alert_script()
                     }, 150 * i);
                 }
             }
+
             animarTexto();
+            getImagesRecortadas();
+
+
+            // getImageSeleccionada();
         });
+
+        function getImagesRecortadas(){
+
+
+            var divImagesprevRecortadas = document.querySelector(".imagenes-prevRecortadas");
+
+            
+            var storedSrcArray = JSON.parse(localStorage.getItem("srcArray")) || [];
+
+            storedSrcArray.forEach(src => {
+                var divRostroRecortado=document.createElement("div");
+                divRostroRecortado.classList.add('div-rostro-recortado','h-[100px]',"w-[100px]",'m-auto','items-center','relative');
+                var iconoCloseImageRecortada= document.createElement("i");
+                iconoCloseImageRecortada.classList.add("fas","fa-times-circle");
+                // Crear elemento de icono de cierre
+
+                var divIconoClose=document.createElement("div");
+                divIconoClose.classList.add("absolute","w-[16px]","h-[16px]","-top-[8px]","-right-[8px]")
+                divIconoClose.appendChild(iconoCloseImageRecortada)
+
+                // Crear un nuevo elemento <img>
+                var imagePrevRecortada = document.createElement("div"); 
+
+                // Asignar el src al atributo src del elemento <img>
+                imagePrevRecortada.style.backgroundImage = `url(${src})`;
+
+                // Agregar clases de estilo si es necesario
+                imagePrevRecortada.classList.add("w-full","h-full","bg-center","bg-no-repeat","cursor-pointer","bg-contain"),
+
+                // imagePrevRecortada.classList.add("h-1/2");
+
+                //Agregar Imagenes a un div de la imagen
+                divRostroRecortado.appendChild(imagePrevRecortada);
+                divRostroRecortado.appendChild(divIconoClose);
+                // Agregar el elemento <img> al contenedor
+                divImagesprevRecortadas.appendChild(divRostroRecortado);
+            });
+
+            var divRostroRecortado=document.querySelector('.div-rostro-recortado');
+            // console.log(divRostroRecortado);
+
+            divRostroRecortado.onclick = function() {
+                console.log("Imagen Recortada");
+            }
+
+        }
 
 
 
